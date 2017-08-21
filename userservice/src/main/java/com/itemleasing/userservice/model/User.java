@@ -1,6 +1,9 @@
-package com.itemleasing.model;
+package com.itemleasing.userservice.model;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,13 +12,17 @@ import java.util.List;
  */
 
 @Entity
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = -9138461153733765604L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date joinDate;
     private String username;
     private String password;

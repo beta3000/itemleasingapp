@@ -1,4 +1,4 @@
-package com.itemleasing;
+package com.itemleasing.userservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

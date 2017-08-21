@@ -1,23 +1,27 @@
-package com.itemleasing.model;
+package com.itemleasing.userservice.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by z00382545 on 8/21/17.
  */
 
 @Entity
-public class Listing {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title;
+    private String name;
     private String status;
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="item_id")
-    private Item item;
+    @JoinColumn(name="user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "item")
+    private List<ImageResource> imageList;
 
     public Long getId() {
         return id;
@@ -27,12 +31,12 @@ public class Listing {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStatus() {
@@ -51,11 +55,19 @@ public class Listing {
         this.description = description;
     }
 
-    public Item getItem() {
-        return item;
+    public List<ImageResource> getImageList() {
+        return imageList;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setImageList(List<ImageResource> imageList) {
+        this.imageList = imageList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
