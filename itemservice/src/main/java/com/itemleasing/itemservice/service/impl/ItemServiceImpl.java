@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by z00382545 on 8/22/17.
@@ -21,5 +22,9 @@ public class ItemServiceImpl implements ItemService{
         Date today = new Date();
         item.setAddDate(today);
         return itemRepository.save(item);
+    }
+
+    public List<Item> getAllItems() {
+        return (List<Item>) itemRepository.findAll();
     }
 }

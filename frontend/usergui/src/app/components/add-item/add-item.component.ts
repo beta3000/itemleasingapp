@@ -22,8 +22,8 @@ export class AddItemComponent implements OnInit {
   onAddItem() {
   	this.itemService.addNewItem(
   		this.name, 
+      this.status, 
   		this.description, 
-  		this.status, 
   		this.itemCondition).subscribe(
   		res => {
   			console.log(res);

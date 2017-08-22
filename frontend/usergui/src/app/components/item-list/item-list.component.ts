@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConst } from '../../utils/app-const';
 // import {MockServerResultsService} from "./mock-server-results-service";
 // import {PagedData} from "./model/paged-data";
 // import {CorporateEmployee} from "./model/corporate-employee";
@@ -11,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListComponent implements OnInit {
 
+  private itemServerPath: string = AppConst.itemServerPath;
+
   rows = [];
   selected = [];
 
@@ -22,7 +25,7 @@ export class ItemListComponent implements OnInit {
 
   fetch(cb) {
     const req = new XMLHttpRequest();
-    req.open('GET', `../../../assets/company.json`);
+    req.open('GET', this.itemServerPath+`/item/all`);
 
     req.onload = () => {
       cb(JSON.parse(req.response));
