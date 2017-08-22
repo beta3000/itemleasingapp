@@ -1,4 +1,4 @@
-package com.itemleasing.userservice.model;
+package com.itemleasing.itemservice.model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +15,8 @@ public class Item {
     private Long id;
     private String name;
     private String status;
+
+    @Column(columnDefinition="text")
     private String description;
     private String itemCondition;
     private Date addDate;

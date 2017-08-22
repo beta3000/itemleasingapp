@@ -1,0 +1,41 @@
+<div class="container form-wrapper">
+	<form (ngSubmit)="onAddItem()">
+		<div class="form-group row">
+			<label for="name" class="col-sm-2 col-form-label">Item Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="name" name="name" [(ngModel)]="name">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="status" class="col-sm-2 col-form-label">Status</label>
+			<div class="col-sm-10">
+				<select class="custom-select" name="status" [(ngModel)]="status">
+					<option value="activef">Active</option>
+					<option value="inactive">Inactive</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="itemCondition" class="col-sm-2 col-form-label">Condition</label>
+			<div class="col-sm-10">
+				<select class="custom-select" name="itemCondition" [(ngModel)]="itemCondition">
+					<option value="activef">New</option>
+					<option value="inactive">Like New</option>
+					<option value="inactive">Good</option>
+					<option value="inactive">Acceptable</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="description" class="col-sm-2 col-form-label">Description</label>
+			<div class="col-sm-10">
+				<textarea rows="6" id="description" class="form-control" name="description" [(ngModel)]="description"></textarea>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</form>
+</div>

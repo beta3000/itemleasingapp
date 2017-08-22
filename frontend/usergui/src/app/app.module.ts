@@ -4,9 +4,12 @@ import { routing } from './app.routing';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import * as $ from 'jquery';
 
 //import services
 import { UserService } from './services/user-service/user.service';
+import { ItemService } from './services/item-service/item.service';
+
 import { MockServerResultsService } from './components/item-list/mock-server-results-service';
 
 
@@ -16,6 +19,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { AddItemComponent } from './components/add-item/add-item.component';
 
 
 
@@ -25,7 +29,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
     NavbarComponent,
     SignUpComponent,
     HomeComponent,
-    ItemListComponent
+    ItemListComponent,
+    AddItemComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
   ],
   providers: [
   	UserService,
+    ItemService,
   	MockServerResultsService
   ],
   bootstrap: [AppComponent]

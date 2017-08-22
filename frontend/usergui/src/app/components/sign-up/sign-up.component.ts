@@ -9,7 +9,6 @@ import {AppConst} from '../../utils/app-const';
 })
 export class SignUpComponent implements OnInit {
 
-  private userServicePath = AppConst.userServicePath;
   private firstName: string;
   private lastName: string;
   private email: string;

@@ -5,7 +5,7 @@ import {AppConst} from '../../utils/app-const';
 
 @Injectable()
 export class UserService {
-  private userServicePath: string = AppConst.userServicePath;
+  private userServerPath: string = AppConst.userServerPath;
 
   constructor(private http:Http) { 
   }
@@ -16,7 +16,7 @@ export class UserService {
   	email: string,
   	password: string
   ) {
-  	let url = this.userServicePath + '/user';
+  	let url = this.userServerPath + '/user';
   	let userInfo = {
   		"firstName" : firstName,
   		"lastName" : lastName,
