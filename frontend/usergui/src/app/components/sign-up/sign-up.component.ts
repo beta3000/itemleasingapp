@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../services/user-service/user.service';
+import {AppConst} from '../../utils/app-const';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,7 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  private userServicePath = AppConst.userServicePath;
+  private firstName: string;
+  private lastName: string;
+  private email: string;
+  private password: string;
+
+  constructor(
+  	private userService: UserService
+  	) { 
+  }
+
+  changeShowStatus(input: any): any{
+    input.type = input.type === 'password' ?  'text' : 'password';
+  }
+
+  onSignUp() {
+  	this.userService.createNewUser(
+  		this.firstName, 
+  		this.lastName, 
+  		this.email, 
+  		this.password).subscribe(
+  		res => {
+  			console.log(res);
+  		}, 
+  		error => {
+  			console.log(error.text());
+  		}
+  	);
+  }
 
   ngOnInit() {
   }
