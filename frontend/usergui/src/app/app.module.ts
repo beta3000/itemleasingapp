@@ -3,6 +3,11 @@ import { NgModule } from '@angular/core';
 import { routing } from './app.routing';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+//import services
+import { UserService } from './services/user-service/user.service';
+import { MockServerResultsService } from './components/item-list/mock-server-results-service';
 
 
 //import components
@@ -10,25 +15,28 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
+import { ItemListComponent } from './components/item-list/item-list.component';
 
-//import services
-import { UserService } from './services/user-service/user.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    ItemListComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     routing,
-    FormsModule
+    FormsModule,
+    NgxDatatableModule
   ],
   providers: [
-  	UserService
+  	UserService,
+  	MockServerResultsService
   ],
   bootstrap: [AppComponent]
 })

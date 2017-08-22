@@ -6,6 +6,8 @@ import com.itemleasing.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * Created by z00382545 on 8/21/17.
  */
@@ -16,6 +18,8 @@ public class UseServiceImpl implements UserService {
     private UserRepository userRepository;
 
     public User createUser(User user) {
+        Date today = new Date();
+        user.setJoinDate(today);
         return userRepository.save(user);
     }
 }
