@@ -1,4 +1,4 @@
-package com.itemleasing.itemservice.config;
+package com.itemleasing.itemservice.security;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
