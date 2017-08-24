@@ -1,7 +1,9 @@
 package com.itemleasing.userservice.service;
 
 import com.itemleasing.userservice.model.User;
-import org.springframework.stereotype.Service;
+import com.itemleasing.userservice.model.security.UserRole;
+
+import java.util.Set;
 
 /**
  * Created by z00382545 on 8/21/17.

@@ -12,6 +12,7 @@ export class SignUpComponent implements OnInit {
   private firstName: string;
   private lastName: string;
   private email: string;
+  private username: string
   private password: string;
 
   constructor(
@@ -28,6 +29,7 @@ export class SignUpComponent implements OnInit {
   		this.firstName, 
   		this.lastName, 
   		this.email, 
+      this.username,
   		this.password).subscribe(
   		res => {
   			console.log(res);

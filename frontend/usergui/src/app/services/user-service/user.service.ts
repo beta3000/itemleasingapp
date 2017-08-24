@@ -14,6 +14,7 @@ export class UserService {
   	firstName: string,
   	lastName: string,
   	email: string,
+    username: string,
   	password: string
   ) {
   	let url = this.userServerPath + '/user';
@@ -21,6 +22,7 @@ export class UserService {
   		"firstName" : firstName,
   		"lastName" : lastName,
   		"email" : email,
+      "username" : username,
   		"password" : password
   	}
   	let header = new Headers({

@@ -1,11 +1,15 @@
 package com.itemleasing.userservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.itemleasing.userservice.model.security.UserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by z00382545 on 8/21/17.
@@ -26,6 +30,10 @@ public class User implements Serializable{
     private Date joinDate;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserRole> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
     private List<Item> itemList;
@@ -114,5 +122,13 @@ public class User implements Serializable{
 
     public void setOrderList(List<Lease> orderList) {
         this.orderList = orderList;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }
