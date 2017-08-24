@@ -51,16 +51,4 @@ public class JWTOAuth2Config extends AuthorizationServerConfigurerAdapter{
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
-
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("eagleeye")
-                .secret("thisissecret")
-                .authorizedGrantTypes(
-                        "refresh_token",
-                        "password",
-                        "client_credentials"
-                ).scopes("webclient", "mobileclient");
-    }
 }

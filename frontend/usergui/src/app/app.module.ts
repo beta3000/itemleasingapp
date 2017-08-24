@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 //import services
 import { UserService } from './services/user-service/user.service';
 import { ItemService } from './services/item-service/item.service';
+import { LoginService } from './services/login-service/login.service';
 
 import { MockServerResultsService } from './components/item-list/mock-server-results-service';
 
@@ -20,6 +21,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { AddItemComponent } from './components/add-item/add-item.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -30,7 +32,8 @@ import { AddItemComponent } from './components/add-item/add-item.component';
     SignUpComponent,
     HomeComponent,
     ItemListComponent,
-    AddItemComponent
+    AddItemComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { AddItemComponent } from './components/add-item/add-item.component';
   providers: [
   	UserService,
     ItemService,
+    LoginService,
   	MockServerResultsService
   ],
   bootstrap: [AppComponent]
