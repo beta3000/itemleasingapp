@@ -3,6 +3,7 @@ package com.itemleasing.itemservice.controller;
 import com.itemleasing.itemservice.config.ServiceConfig;
 import com.itemleasing.itemservice.model.Item;
 import com.itemleasing.itemservice.service.ItemService;
+import com.itemleasing.itemservice.utils.tokenParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,16 @@ public class ItemController {
     private ItemService itemService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Item addItem(@RequestBody Item item) {
-        return itemService.addItem(item);
+    public Item addItem(@RequestBody Item item, @RequestHeader("Authorization") String bearerToken) {
+        String username = "";
+
+        if(bearerToken != null) {
+            String accessToken = bearerToken.replace("Bearer ", "");
+
+            username = tokenParser.getUsername(accessToken, serviceConfig.getJwtSigningKey());
+        }
+
+        return itemService.addItemByUser(item, username);
     }
 
     @RequestMapping("/itemsByUser")
@@ -36,16 +45,7 @@ public class ItemController {
         if(bearerToken != null) {
             String accessToken = bearerToken.replace("Bearer ", "");
 
-            try {
-                Claims claims = Jwts.parser()
-                        .setSigningKey(serviceConfig.getJwtSigningKey().getBytes("UTF-8"))
-                        .parseClaimsJws(accessToken).getBody();
-
-                username = (String) claims.get("user_name");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            username = tokenParser.getUsername(accessToken, serviceConfig.getJwtSigningKey());
         }
 
         return itemService.getItemsByUsername(username);

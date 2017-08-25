@@ -17,15 +17,17 @@ import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService{
+
     @Autowired
     private ItemRepository itemRepository;
 
     @Autowired
     private UserService userService;
 
-    public Item addItem(Item item) {
+    public Item addItemByUser(Item item, String username) {
         Date today = new Date();
         item.setAddDate(today);
+        item.setUser(userService.findByUsername(username));
         return itemRepository.save(item);
     }
 

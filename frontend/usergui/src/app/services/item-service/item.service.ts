@@ -24,9 +24,12 @@ export class ItemService {
   		"description" : description,
   		"itemCondition" : itemCondition
   	}
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
 
   	let header = new Headers({
       'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
     });
 
   	return this.http.post(url, JSON.stringify(itemInfo), {headers: header});
