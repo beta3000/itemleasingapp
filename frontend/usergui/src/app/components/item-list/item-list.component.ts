@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppConst } from '../../utils/app-const';
+import { ItemService } from '../../services/item-service/item.service';
 // import {MockServerResultsService} from "./mock-server-results-service";
 // import {PagedData} from "./model/paged-data";
 // import {CorporateEmployee} from "./model/corporate-employee";
@@ -17,21 +18,31 @@ export class ItemListComponent implements OnInit {
   rows = [];
   selected = [];
 
-  constructor() {
+  constructor(private itemService: ItemService) {
     this.fetch((data) => {
       this.rows = data;
     });
   }
 
   fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', this.itemServerPath+`/item/all`);
+    // const req = new XMLHttpRequest();
+    // req.open('GET', this.itemServerPath+`/item/all`);
 
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
+    // req.onload = () => {
+    //   cb(JSON.parse(req.response));
+    // };
 
-    req.send();
+    // req.send();
+
+    this.itemService.findItems().subscribe(
+      res => {
+        console.log(res);
+        cb(res.json());
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   onSelect({ selected }) {

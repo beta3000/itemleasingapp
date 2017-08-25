@@ -24,11 +24,22 @@ export class ItemService {
   		"description" : description,
   		"itemCondition" : itemCondition
   	}
+
   	let header = new Headers({
-      'Content-Type' : 'application/json'
+      'Content-Type' : 'application/json',
     });
 
   	return this.http.post(url, JSON.stringify(itemInfo), {headers: header});
+  }
+
+  findItems() {
+    let url = this.itemServerPath + '/item/all';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let header = new Headers({
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.get(url, {headers: header});
   }
 
 }
