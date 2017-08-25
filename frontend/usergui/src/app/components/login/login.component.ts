@@ -17,12 +17,18 @@ export class LoginComponent implements OnInit {
   onLogin() {
   	this.loginService.sendCredentials(this.credential.username, this.credential.password).subscribe(
   		res => {
-  			console.log(res);
+  			console.log(res.json());
+  			localStorage.setItem('currentUser', JSON.stringify({username : this.credential.username, access_token : res.json().access_token}));
   		},
   		error => {
   			console.log(error);
   		}
   	);
+  }
+
+  onLogout(): void {
+        // clear token remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
   }
 
   ngOnInit() {

@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import * as $ from 'jquery';
 
+import { AuthGuard } from './utils/auth.guard';
+
 //import services
 import { UserService } from './services/user-service/user.service';
 import { ItemService } from './services/item-service/item.service';
@@ -43,6 +45,7 @@ import { LoginComponent } from './components/login/login.component';
     NgxDatatableModule
   ],
   providers: [
+    AuthGuard,
   	UserService,
     ItemService,
     LoginService,

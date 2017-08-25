@@ -1,5 +1,6 @@
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
+import {AuthGuard} from './utils/auth.guard';
 
 import {HomeComponent} from "./components/home/home.component";
 import {SignUpComponent} from './components/sign-up/sign-up.component';
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'itemList',
-		component: ItemListComponent
+		component: ItemListComponent, canActivate: [AuthGuard]
 	},
 	{
 		path: 'addItem',
