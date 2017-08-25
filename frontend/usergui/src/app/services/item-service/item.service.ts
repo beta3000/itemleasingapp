@@ -45,4 +45,10 @@ export class ItemService {
     return this.http.get(url, {headers: header});
   }
 
+  findAllItems() {
+    let url = this.itemServerPath + '/item/all';
+
+    return this.http.get(url);
+  }
+
 }

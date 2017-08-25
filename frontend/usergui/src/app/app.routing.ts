@@ -7,6 +7,7 @@ import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {LoginComponent} from './components/login/login.component';
 import {ItemListComponent} from './components/item-list/item-list.component';
 import {AddItemComponent} from './components/add-item/add-item.component';
+import {AllItemsComponent} from './components/all-items/all-items.component';
 
 const appRoutes: Routes = [
 	{
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
 	{
 		path: 'home',
 		component: HomeComponent
+	},
+	{
+		path: 'allItems',
+		component: AllItemsComponent
 	},
 	{
 		path: 'signUp',
