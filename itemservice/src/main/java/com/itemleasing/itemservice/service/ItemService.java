@@ -10,4 +10,5 @@ import java.util.List;
 public interface ItemService {
     Item addItem(Item user);
     List<Item> getAllItems();
+    List<Item> getItemsByUsername(String username);
 }

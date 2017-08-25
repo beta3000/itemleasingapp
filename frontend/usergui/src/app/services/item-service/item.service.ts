@@ -32,8 +32,8 @@ export class ItemService {
   	return this.http.post(url, JSON.stringify(itemInfo), {headers: header});
   }
 
-  findItems() {
-    let url = this.itemServerPath + '/item/all';
+  findItemsByUser() {
+    let url = this.itemServerPath + '/item/itemsByUser';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let header = new Headers({
       'Authorization' : 'Bearer '+currentUser.access_token

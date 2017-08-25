@@ -12,9 +12,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @Configuration
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter{
 
+    private static final String[] PUBLIC_MATCHERS = {
+            "/v1/item/all",
+    };
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(PUBLIC_MATCHERS)
+                .permitAll()
                 .antMatchers(HttpMethod.GET, "/v1/item/**")
                 .hasRole("USER")
                 .anyRequest()

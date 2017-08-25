@@ -1,6 +1,7 @@
 package com.itemleasing.itemservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class User implements Serializable{
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Item> itemList;
 
     @OneToMany(mappedBy = "lessor")

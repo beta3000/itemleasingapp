@@ -34,7 +34,7 @@ export class ItemListComponent implements OnInit {
 
     // req.send();
 
-    this.itemService.findItems().subscribe(
+    this.itemService.findItemsByUser().subscribe(
       res => {
         console.log(res);
         cb(res.json());
