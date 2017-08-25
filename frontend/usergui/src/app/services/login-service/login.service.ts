@@ -28,4 +28,19 @@ export class LoginService {
   	return this.http.post(url, userInfo, options);
   }
 
+  checkLogin(): boolean {
+  		if (localStorage.getItem('currentUser')) {
+            // logged in so return true
+            return true;
+        } else {
+        	return false;
+        }
+  }
+
+  logout(): void {
+        // clear token remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+        location.reload();
+  }
+
 }

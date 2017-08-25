@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   		res => {
   			console.log(res.json());
   			localStorage.setItem('currentUser', JSON.stringify({username : this.credential.username, access_token : res.json().access_token}));
+  			location.reload();			
   		},
   		error => {
   			console.log(error);
