@@ -14,6 +14,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     private static final String[] PUBLIC_MATCHERS = {
             "/v1/item/all",
+            "/v1/item/{id}"
     };
 
     @Override

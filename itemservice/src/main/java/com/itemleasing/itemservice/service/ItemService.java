@@ -12,4 +12,5 @@ public interface ItemService {
     Item addItemByUser(Item item, String username);
     List<Item> getAllItems();
     List<Item> getItemsByUsername(String username);
+    Item getItemById(Long id);
 }

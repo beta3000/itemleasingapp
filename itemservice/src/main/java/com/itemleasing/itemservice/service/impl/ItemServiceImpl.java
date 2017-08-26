@@ -40,4 +40,8 @@ public class ItemServiceImpl implements ItemService{
 
         return (List<Item>) itemRepository.findByUser(user);
     }
+
+    public Item getItemById(Long id) {
+        return itemRepository.findOne(id);
+    }
 }

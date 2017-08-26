@@ -51,4 +51,10 @@ export class ItemService {
     return this.http.get(url);
   }
 
+  findItemById(id: number) {
+    let url = this.itemServerPath + '/item/' + id;
+    
+    return this.http.get(url);
+  }
+
 }

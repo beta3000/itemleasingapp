@@ -55,4 +55,9 @@ public class ItemController {
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
+
+    @RequestMapping("/{id}")
+    public Item getItemById(@PathVariable Long id) {
+        return itemService.getItemById(id);
+    }
 }

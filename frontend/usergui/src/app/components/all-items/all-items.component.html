@@ -4,13 +4,17 @@
       All Items
     </h3>
       <ngx-datatable
-      class="material"
+      class="material pointer"
       [rows]="rows"
       [columnMode]="'force'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
-      [limit]="20">
+      [limit]="20"
+      [selected]="selected"
+      [selectionType]="'single'"
+      (activate)="onActivate($event)"
+      (select)='onSelect($event)'>
     <ngx-datatable-column [width]="50"  name="Name"></ngx-datatable-column>
     <ngx-datatable-column [width]="50"  name="Status"></ngx-datatable-column>
     <ngx-datatable-column [width]="50"  name="Condition" prop="itemCondition"></ngx-datatable-column>
