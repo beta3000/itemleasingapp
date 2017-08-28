@@ -1,5 +1,7 @@
 package com.itemleasing.itemservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,8 @@ public class Item {
     @Column(columnDefinition="text")
     private String description;
     private String itemCondition;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date addDate;
 
     @ManyToOne
