@@ -26,6 +26,7 @@ import { AddItemComponent } from './components/add-item/add-item.component';
 import { LoginComponent } from './components/login/login.component';
 import { AllItemsComponent } from './components/all-items/all-items.component';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
+import { UpdateItemComponent } from './components/update-item/update-item.component';
 
 
 
@@ -39,7 +40,8 @@ import { ItemDetailComponent } from './components/item-detail/item-detail.compon
     AddItemComponent,
     LoginComponent,
     AllItemsComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    UpdateItemComponent
   ],
   imports: [
     BrowserModule,

@@ -61,6 +61,10 @@ export class ItemListComponent implements OnInit {
     this.selected.push(...selected);
   }
 
+  onUpdate(id) {
+    this.router.navigate(['/updateItem', id])
+  }
+
   onActivate(event) {
   }
 

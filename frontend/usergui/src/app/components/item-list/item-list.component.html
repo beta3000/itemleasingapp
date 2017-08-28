@@ -53,6 +53,17 @@
     <ngx-datatable-column [width]="50"  name="Status"></ngx-datatable-column>
     <ngx-datatable-column [width]="50"  name="Condition" prop="itemCondition"></ngx-datatable-column>
     <ngx-datatable-column [width]="400" name="Description"></ngx-datatable-column>
+    <ngx-datatable-column [width]="50" name="Actions" sortable="false" prop="id">
+       <template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <button md-icon-button class="pointer" (click)="onUpdate(value)" [disabled]="row['status']==='BLOCKED'">
+            <i class="fa fa-pencil-square-o"></i>
+        </button>
+        <button md-icon-button class="pointer" (click)="approveAgent(value)" [disabled]="row['status']==='APPROVED'">
+            <i class="fa fa-times"></i>
+        </button>
+    </template>
+    </ngx-datatable-column>
+
   </ngx-datatable>
   </div>
 </div>

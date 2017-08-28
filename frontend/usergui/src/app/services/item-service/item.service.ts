@@ -35,6 +35,26 @@ export class ItemService {
   	return this.http.post(url, JSON.stringify(itemInfo), {headers: header});
   }
 
+  updateItem(item: Item) {
+    let url = this.itemServerPath + '/item/' + item.id;
+    let itemInfo = {
+      "id" : item.id,
+      "name" : item.name,
+      "status" : item.status,
+      "description" : item.description,
+      "itemCondition" : item.itemCondition
+    }
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+
+    let header = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.put(url, JSON.stringify(itemInfo), {headers: header});
+  }
+
   findItemsByUser() {
     let url = this.itemServerPath + '/item/itemsByUser';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));

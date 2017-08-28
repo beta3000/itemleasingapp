@@ -9,6 +9,8 @@ import {ItemListComponent} from './components/item-list/item-list.component';
 import {AddItemComponent} from './components/add-item/add-item.component';
 import {AllItemsComponent} from './components/all-items/all-items.component';
 import {ItemDetailComponent} from './components/item-detail/item-detail.component';
+import {UpdateItemComponent} from './components/update-item/update-item.component';
+
 
 const appRoutes: Routes = [
 	{
@@ -43,6 +45,10 @@ const appRoutes: Routes = [
 	{
 		path: 'addItem',
 		component: AddItemComponent
+	},
+	{
+		path: 'updateItem/:id',
+		component: UpdateItemComponent
 	}
 ];
 

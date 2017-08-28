@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -59,5 +60,16 @@ public class ItemController {
     @RequestMapping("/{id}")
     public Item getItemById(@PathVariable Long id) {
         return itemService.getItemById(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Item updateItem(@PathVariable Long id, @RequestBody Item item) throws IOException{
+        item.setId(id);
+        return itemService.updateItem(item);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteItemById(@PathVariable Long id) throws IOException{
+        itemService.deleteItemById(id);
     }
 }

@@ -50,7 +50,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         classes = ItemserviceApplication.class
 )
 @AutoConfigureMockMvc
-@TestPropertySource(properties = {"auth.server = http://localhost:8901/"})
 public class ItemRestControllerTest {
 
     @Autowired
@@ -78,7 +77,9 @@ public class ItemRestControllerTest {
     @Test
     public void testGettingItemByUser_Status200() throws IOException, Exception {
 
+        //
         //get access token from authorization server
+        //
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("grant_type", "password");
         map.add("scope", "webclient");
@@ -104,8 +105,9 @@ public class ItemRestControllerTest {
 
         JsonElement accessToken = authObject.get("access_token");
 
-
+        //
         //add access token in the header and fetch items by the user
+        //
         headers.clear();
         headers.add("Authorization", "Bearer "+accessToken.getAsString());
         final HttpEntity<String> entity2 = new HttpEntity<String>(headers);
@@ -121,7 +123,9 @@ public class ItemRestControllerTest {
             itemList.add(item);
         }
 
+        //
         //verify the item list
+        //
         assertThat(itemList, hasSize(4));
         assertThat(itemList.get(0).getId(), is(7L));
         assertThat(itemList.get(0).getName(), is("item1"));
