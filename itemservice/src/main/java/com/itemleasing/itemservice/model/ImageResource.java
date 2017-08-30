@@ -1,5 +1,7 @@
 package com.itemleasing.itemservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -14,6 +16,7 @@ public class ImageResource {
 
     @ManyToOne
     @JoinColumn(name="item_id")
+    @JsonIgnore
     private Item item;
 
     private String imageUrl;

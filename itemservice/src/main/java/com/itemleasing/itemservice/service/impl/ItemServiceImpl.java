@@ -36,8 +36,14 @@ public class ItemServiceImpl implements ItemService{
     public Item addItemByUser(Item item, String username) {
         Date today = new Date();
         item.setAddDate(today);
-        item.setUser(userService.findByUsername(username));
-        return itemRepository.save(item);
+
+        User user = userService.findByUsername(username);
+        item.setUser(user);
+        Item newItem = itemRepository.save(item);
+
+        s3Service.createS3ItemFolder(user, item);
+
+        return newItem;
     }
 
     @Override
@@ -64,7 +70,13 @@ public class ItemServiceImpl implements ItemService{
         if(localItem == null) {
             throw new IOException("Item was not found.");
         } else {
-            return itemRepository.save(item);
+            localItem.setName(item.getName());
+            localItem.setItemCondition(item.getItemCondition());
+            localItem.setStatus(item.getStatus());
+            localItem.setDescription(item.getDescription());
+            localItem.setImageList(item.getImageList());
+
+            return itemRepository.save(localItem);
         }
     }
 
@@ -82,4 +94,6 @@ public class ItemServiceImpl implements ItemService{
 
         return putObjectResultList;
     }
+
+
 }

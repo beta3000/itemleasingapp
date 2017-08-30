@@ -64,13 +64,13 @@ public class UseServiceImpl implements UserService {
             user.setPassword(encryptedPassword);
             localUser = userRepository.save(user);
 
-            createS3Folder(user);
+            createS3UserFolder(user);
         }
 
         return localUser;
     }
 
-    public void createS3Folder(User user) {
+    private void createS3UserFolder(User user) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(0);
 

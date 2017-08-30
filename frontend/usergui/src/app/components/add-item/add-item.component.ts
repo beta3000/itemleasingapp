@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item-service/item.service';
+import { AppConst } from '../../utils/app-const';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { ItemService } from '../../services/item-service/item.service';
 })
 export class AddItemComponent implements OnInit {
 
+  private itemServerPath: string = AppConst.itemServerPath;
   private name: string;
   private description: string;
   private status: string;
@@ -33,6 +35,8 @@ export class AddItemComponent implements OnInit {
   		}
   	);
   }
+
+  
 
   ngOnInit() {}
 

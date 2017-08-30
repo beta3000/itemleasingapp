@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.model.Item;
+import com.itemleasing.itemservice.model.User;
 import com.itemleasing.itemservice.service.ImageResourceService;
 import com.itemleasing.itemservice.service.S3Service;
 import org.apache.commons.io.IOUtils;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -56,19 +58,39 @@ public class S3ServiceImpl implements S3Service{
     public List<PutObjectResult> upload(MultipartFile[] multipartFiles, Item item) {
         List<PutObjectResult> putObjectResults = new ArrayList<>();
 
+        User user = item.getUser();
+
         Arrays.stream(multipartFiles)
                 .filter(multipartFile -> !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
                 .forEach(multipartFile -> {
                     try {
                         String uniqueID = UUID.randomUUID().toString();
                         String fileName = uniqueID+".png";
-                        putObjectResults.add(upload(multipartFile.getInputStream(), fileName));
-                        imageResourceService.saveImageResource(item, fileName);
+                        String filePath = user.getUsername()+"_"+user.getId()+"/"+
+                                item.getName()+"_"+item.getId()+"/" + fileName;
+
+                        putObjectResults.add(upload(multipartFile.getInputStream(), filePath));
+                        imageResourceService.saveImageResource(item, filePath);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
 
         return putObjectResults;
+    }
+
+    public void createS3ItemFolder(User user, Item item) {
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(0);
+
+        // create empty content
+        InputStream emptyContent = new ByteArrayInputStream(new byte[0]);
+
+        // create a PutObjectRequest passing the folder name suffixed by /
+        PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, user.getUsername()+"_"+user.getId()+"/"+
+                item.getName()+"_"+item.getId()+"/init_0", emptyContent, metadata);
+
+        // send request to S3 to create folder
+        amazonS3.putObject(putObjectRequest);
     }
 }
