@@ -55,6 +55,20 @@ export class ItemService {
     return this.http.put(url, JSON.stringify(itemInfo), {headers: header});
   }
 
+  deleteItemById(id: number) {
+    let url = this.itemServerPath + '/item/' + id;
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+
+    let header = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.delete(url, {headers: header});
+
+  }
+
   findItemsByUser() {
     let url = this.itemServerPath + '/item/itemsByUser';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));

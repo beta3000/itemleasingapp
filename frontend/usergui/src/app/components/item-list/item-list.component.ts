@@ -65,6 +65,17 @@ export class ItemListComponent implements OnInit {
     this.router.navigate(['/updateItem', id])
   }
 
+  onDelete(id) {
+    this.itemService.deleteItemById(id).subscribe(
+      res => {
+        console.log(res);
+      }, 
+      error => {
+        console.log(error.text());
+      }
+    );
+  }
+
   onActivate(event) {
   }
 
