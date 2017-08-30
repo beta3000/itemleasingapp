@@ -1,10 +1,13 @@
 package com.itemleasing.itemservice.service.impl;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.itemleasing.itemservice.model.Item;
+import com.itemleasing.itemservice.service.ImageResourceService;
 import com.itemleasing.itemservice.service.S3Service;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by z00382545 on 8/29/17.
@@ -25,11 +29,15 @@ import java.util.List;
 
 @Service
 public class S3ServiceImpl implements S3Service{
+
     @Autowired
-    private AmazonS3Client amazonS3Client;
+    private AmazonS3 amazonS3;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
+
+    @Autowired
+    private ImageResourceService imageResourceService;
 
     @Override
     public PutObjectResult upload(InputStream inputStream, String uploadKey) {
@@ -37,7 +45,7 @@ public class S3ServiceImpl implements S3Service{
 
         putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
 
-        PutObjectResult putObjectResult = amazonS3Client.putObject(putObjectRequest);
+        PutObjectResult putObjectResult = amazonS3.putObject(putObjectRequest);
 
         IOUtils.closeQuietly(inputStream);
 
@@ -45,14 +53,17 @@ public class S3ServiceImpl implements S3Service{
     }
 
     @Override
-    public List<PutObjectResult> upload(MultipartFile[] multipartFiles) {
+    public List<PutObjectResult> upload(MultipartFile[] multipartFiles, Item item) {
         List<PutObjectResult> putObjectResults = new ArrayList<>();
 
         Arrays.stream(multipartFiles)
                 .filter(multipartFile -> !StringUtils.isEmpty(multipartFile.getOriginalFilename()))
                 .forEach(multipartFile -> {
                     try {
-                        putObjectResults.add(upload(multipartFile.getInputStream(), multipartFile.getOriginalFilename()));
+                        String uniqueID = UUID.randomUUID().toString();
+                        String fileName = uniqueID+".png";
+                        putObjectResults.add(upload(multipartFile.getInputStream(), fileName));
+                        imageResourceService.saveImageResource(item, fileName);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

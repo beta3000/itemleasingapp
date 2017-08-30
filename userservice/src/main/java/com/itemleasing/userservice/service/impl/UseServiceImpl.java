@@ -1,5 +1,9 @@
 package com.itemleasing.userservice.service.impl;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.itemleasing.userservice.model.User;
 import com.itemleasing.userservice.model.security.Role;
 import com.itemleasing.userservice.model.security.UserRole;
@@ -10,8 +14,11 @@ import com.itemleasing.userservice.utils.SecurityUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +37,12 @@ public class UseServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private AmazonS3 amazonS3;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
     public User createUser(User user) {
         User localUser = userRepository.findByUsername(user.getUsername());
@@ -50,8 +63,25 @@ public class UseServiceImpl implements UserService {
             String encryptedPassword = SecurityUtility.passwordEncoder().encode(user.getPassword());
             user.setPassword(encryptedPassword);
             localUser = userRepository.save(user);
+
+            createS3Folder(user);
         }
 
         return localUser;
+    }
+
+    public void createS3Folder(User user) {
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(0);
+
+        // create empty content
+        InputStream emptyContent = new ByteArrayInputStream(new byte[0]);
+
+        // create a PutObjectRequest passing the folder name suffixed by /
+        PutObjectRequest putObjectRequest = new PutObjectRequest(bucket,
+                user.getUsername()+"_"+user.getId()+"/init_0", emptyContent, metadata);
+
+        // send request to S3 to create folder
+        amazonS3.putObject(putObjectRequest);
     }
 }

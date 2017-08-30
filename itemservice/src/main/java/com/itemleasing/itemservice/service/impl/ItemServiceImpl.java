@@ -1,12 +1,15 @@
 package com.itemleasing.itemservice.service.impl;
 
+import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.model.Item;
 import com.itemleasing.itemservice.model.User;
 import com.itemleasing.itemservice.repository.ItemRepository;
 import com.itemleasing.itemservice.service.ItemService;
+import com.itemleasing.itemservice.service.S3Service;
 import com.itemleasing.itemservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOError;
 import java.io.IOException;
@@ -25,6 +28,9 @@ public class ItemServiceImpl implements ItemService{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private S3Service s3Service;
 
     @Override
     public Item addItemByUser(Item item, String username) {
@@ -65,5 +71,15 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public void deleteItemById(Long id) {
         itemRepository.delete(id);
+    }
+
+
+    @Override
+    public List<PutObjectResult> uploadItemImage(MultipartFile[] multipartFiles, Long itemId) {
+
+        Item item = getItemById(itemId);
+        List<PutObjectResult> putObjectResultList = s3Service.upload(multipartFiles, item);
+
+        return putObjectResultList;
     }
 }

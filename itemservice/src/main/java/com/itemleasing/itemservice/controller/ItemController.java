@@ -80,7 +80,11 @@ public class ItemController {
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public List<PutObjectResult> upload(@RequestParam("file") MultipartFile[] multipartFiles) {
-        return s3Service.upload(multipartFiles);
+    public List<PutObjectResult> upload(
+            @RequestParam("file") MultipartFile[] multipartFiles,
+            @RequestParam("id") String itemId
+            ) {
+
+        return itemService.uploadItemImage(multipartFiles, Long.parseLong(itemId));
     }
 }

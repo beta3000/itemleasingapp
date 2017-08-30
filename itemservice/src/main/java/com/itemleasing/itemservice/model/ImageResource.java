@@ -18,6 +18,13 @@ public class ImageResource {
 
     private String imageUrl;
 
+    public ImageResource(){}
+
+    public ImageResource(Item item, String imageUrl) {
+        this.item = item;
+        this.imageUrl = imageUrl;
+    }
+
     public Long getId() {
         return id;
     }
