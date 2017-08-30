@@ -28,6 +28,25 @@ export class LoginService {
   	return this.http.post(url, userInfo, options);
   }
 
+  sendRefreshToken(refreshToken: string) {
+    let url = this.authServerPath+'/oauth/token';
+    let appName="eagleeye";
+    let appKey="thisissecret";
+
+    let encodedAppKey = btoa(appName+":"+appKey);
+    let basicHeader = "Basic "+encodedAppKey;
+    let headers = new Headers({
+      'Content-Type' : 'application/x-www-form-urlencoded',
+      'Authorization' : basicHeader
+    });
+
+    let options    = new RequestOptions({ headers: headers });
+
+    let tokenInfo = "grant_type=refresh_token&refresh_token="+refreshToken;
+
+    return this.http.post(url, tokenInfo, options);
+  }
+
   checkLogin(): boolean {
   		if (localStorage.getItem('currentUser')) {
             // logged in so return true

@@ -22,6 +22,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
   	this.loginService.logout();
+    location.assign('/signIn');
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    currentUser.shouldSendRefreshToken = false;
   }
 
   ngOnInit() {
