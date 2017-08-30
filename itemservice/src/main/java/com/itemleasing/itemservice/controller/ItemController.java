@@ -1,13 +1,16 @@
 package com.itemleasing.itemservice.controller;
 
+import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.config.ServiceConfig;
 import com.itemleasing.itemservice.model.Item;
 import com.itemleasing.itemservice.service.ItemService;
+import com.itemleasing.itemservice.service.S3Service;
 import com.itemleasing.itemservice.utils.tokenParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +28,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private S3Service s3Service;
 
     @RequestMapping(method = RequestMethod.POST)
     public Item addItem(@RequestBody Item item, @RequestHeader("Authorization") String bearerToken) {
@@ -71,5 +77,10 @@ public class ItemController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteItemById(@PathVariable Long id) throws IOException{
         itemService.deleteItemById(id);
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public List<PutObjectResult> upload(@RequestParam("file") MultipartFile[] multipartFiles) {
+        return s3Service.upload(multipartFiles);
     }
 }
