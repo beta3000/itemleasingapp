@@ -1,8 +1,8 @@
 package com.itemleasing.service.impl;
 
-import com.itemleasing.itemservice.model.User;
-import com.itemleasing.itemservice.repository.UserRepository;
-import com.itemleasing.itemservice.service.UserService;
+import com.itemleasing.model.User;
+import com.itemleasing.repository.UserRepository;
+import com.itemleasing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 

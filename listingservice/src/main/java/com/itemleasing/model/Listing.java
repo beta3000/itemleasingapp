@@ -1,6 +1,7 @@
 package com.itemleasing.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -27,9 +28,13 @@ public class Listing {
     @Column(columnDefinition="text")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name="item_id")
+    @OneToMany(mappedBy = "listing")
     private List<Item> itemList;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonIgnore
+    private User user;
 
     public Long getId() {
         return id;
@@ -93,5 +98,13 @@ public class Listing {
 
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

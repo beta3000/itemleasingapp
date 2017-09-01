@@ -21,19 +21,24 @@ export class LoginComponent implements OnInit {
   onLogin() {
   	this.loginService.sendCredentials(this.credential.username, this.credential.password).subscribe(
   		res => {
+        let that = this;
   			console.log(res.json());
   			localStorage.setItem('currentUser', JSON.stringify({username : this.credential.username, access_token : res.json().access_token, refresh_token : res.json().refresh_token, shouldSendRefreshToken : true} ));
-  			location.assign('/home');
         // this.router.navigate(['/home']);
 
         let refreshInterval = setInterval(function(){
+
           let currentUser = JSON.parse(localStorage.getItem('currentUser'));
           if(currentUser.shouldSendRefreshToken) {
-            this.sendRefreshToken();
+            console.log("Sending refresh token...");
+            that.sendRefreshToken();
           } else {
-             clearInterval(refreshInterval);
+            console.log("Stop refreshing token...");
+            clearInterval(refreshInterval);
           }
-        }, 3600 * 6);
+        }, 1000 * 3600 * 6);
+
+        location.assign('/home');
 
   		},
   		error => {
@@ -47,7 +52,7 @@ export class LoginComponent implements OnInit {
       this.loginService.sendRefreshToken(currentUser.refresh_token).subscribe(
         res => {
         console.log(res.json());
-        localStorage.setItem('currentUser', JSON.stringify({username : this.credential.username, access_token : res.json().access_token, refresh_token : res.json().refresh_token}));
+        localStorage.setItem('currentUser', JSON.stringify({username : this.credential.username, access_token : res.json().access_token, refresh_token : res.json().refresh_token, shouldSendRefreshToken : true}));
       },
       error => {
         console.log(error);

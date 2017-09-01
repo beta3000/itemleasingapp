@@ -1,6 +1,6 @@
 package com.itemleasing.repository;
 
-import com.itemleasing.itemservice.model.ImageResource;
+import com.itemleasing.model.ImageResource;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,6 +1,6 @@
 package com.itemleasing.repository;
 
-import com.itemleasing.itemservice.model.User;
+import com.itemleasing.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**

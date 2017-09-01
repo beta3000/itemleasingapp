@@ -10,6 +10,9 @@ import {AddItemComponent} from './components/add-item/add-item.component';
 import {AllItemsComponent} from './components/all-items/all-items.component';
 import {ItemDetailComponent} from './components/item-detail/item-detail.component';
 import {UpdateItemComponent} from './components/update-item/update-item.component';
+import {ListingsComponent} from './components/listings/listings.component';
+import {AddListingComponent} from './components/add-listing/add-listing.component';
+import {UpdateListingComponent} from './components/update-listing/update-listing.component';
 
 
 const appRoutes: Routes = [
@@ -40,15 +43,27 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'itemDetail/:id',
-		component: ItemDetailComponent
+		component: ItemDetailComponent, canActivate: [AuthGuard]
 	},
 	{
 		path: 'addItem',
-		component: AddItemComponent
+		component: AddItemComponent, canActivate: [AuthGuard]
 	},
 	{
 		path: 'updateItem/:id',
-		component: UpdateItemComponent
+		component: UpdateItemComponent, canActivate: [AuthGuard]
+	},
+	{
+		path: 'listings',
+		component: ListingsComponent, canActivate: [AuthGuard]
+	},
+	{
+		path: 'addListing',
+		component: AddListingComponent, canActivate: [AuthGuard]
+	},
+	{
+		path: 'updateListing/:id',
+		component: UpdateListingComponent, canActivate: [AuthGuard]
 	}
 ];
 

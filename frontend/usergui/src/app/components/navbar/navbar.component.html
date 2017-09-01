@@ -21,7 +21,10 @@
         <a class="nav-link" routerLink="/signIn">Sign in</a>
       </li>
       <li class="nav-item" *ngIf="userLoggedIn">
-        <a class="nav-link" routerLink="/itemList">Items</a>
+        <a class="nav-link" routerLink="/itemList">My Items</a>
+      </li>
+      <li class="nav-item" *ngIf="userLoggedIn">
+        <a class="nav-link" routerLink="/listings">My Listings</a>
       </li>
       <li class="nav-item" *ngIf="userLoggedIn">
         <a class="nav-link pointer" (click)="logout()">Logout</a>

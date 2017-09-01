@@ -34,6 +34,11 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<ImageResource> imageList;
 
+    @ManyToOne
+    @JoinColumn(name="listing_id")
+    @JsonIgnore
+    private Listing listing;
+
     public Long getId() {
         return id;
     }
@@ -96,5 +101,13 @@ public class Item {
 
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
+    }
+
+    public Listing getListing() {
+        return listing;
+    }
+
+    public void setListing(Listing listing) {
+        this.listing = listing;
     }
 }

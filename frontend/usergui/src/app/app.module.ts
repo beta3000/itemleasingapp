@@ -12,7 +12,7 @@ import { AuthGuard } from './utils/auth.guard';
 import { UserService } from './services/user-service/user.service';
 import { ItemService } from './services/item-service/item.service';
 import { LoginService } from './services/login-service/login.service';
-
+import { ListingService } from './services/listing-service/listing.service';
 import { MockServerResultsService } from './components/item-list/mock-server-results-service';
 
 
@@ -27,7 +27,9 @@ import { LoginComponent } from './components/login/login.component';
 import { AllItemsComponent } from './components/all-items/all-items.component';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 import { UpdateItemComponent } from './components/update-item/update-item.component';
-
+import { ListingsComponent } from './components/listings/listings.component';
+import { AddListingComponent } from './components/add-listing/add-listing.component';
+import { UpdateListingComponent } from './components/update-listing/update-listing.component';
 
 
 @NgModule({
@@ -41,7 +43,10 @@ import { UpdateItemComponent } from './components/update-item/update-item.compon
     LoginComponent,
     AllItemsComponent,
     ItemDetailComponent,
-    UpdateItemComponent
+    UpdateItemComponent,
+    ListingsComponent,
+    AddListingComponent,
+    UpdateListingComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ import { UpdateItemComponent } from './components/update-item/update-item.compon
   	UserService,
     ItemService,
     LoginService,
+    ListingService,
   	MockServerResultsService
   ],
   bootstrap: [AppComponent]

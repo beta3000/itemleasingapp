@@ -32,6 +32,10 @@ public class User implements Serializable{
     @JsonIgnore
     private List<Item> itemList;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Listing> listings;
+
     public Long getId() {
         return id;
     }
@@ -96,4 +100,11 @@ public class User implements Serializable{
         this.itemList = itemList;
     }
 
+    public List<Listing> getListings() {
+        return listings;
+    }
+
+    public void setListings(List<Listing> listings) {
+        this.listings = listings;
+    }
 }

@@ -1,9 +1,9 @@
 package com.itemleasing.service.impl;
 
-import com.itemleasing.itemservice.model.ImageResource;
-import com.itemleasing.itemservice.model.Item;
-import com.itemleasing.itemservice.repository.ImageResourceRepository;
-import com.itemleasing.itemservice.service.ImageResourceService;
+import com.itemleasing.model.ImageResource;
+import com.itemleasing.model.Item;
+import com.itemleasing.repository.ImageResourceRepository;
+import com.itemleasing.service.ImageResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ImageResourceServiceImpl implements ImageResourceService{
+public class ImageResourceServiceImpl implements ImageResourceService {
 
     @Autowired
     private ImageResourceRepository imageResourceRepository;

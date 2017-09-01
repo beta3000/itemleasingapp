@@ -5,10 +5,10 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
-import com.itemleasing.itemservice.model.Item;
-import com.itemleasing.itemservice.model.User;
-import com.itemleasing.itemservice.service.ImageResourceService;
-import com.itemleasing.itemservice.service.S3Service;
+import com.itemleasing.model.Item;
+import com.itemleasing.model.User;
+import com.itemleasing.service.ImageResourceService;
+import com.itemleasing.service.S3Service;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 
 @Service
-public class S3ServiceImpl implements S3Service{
+public class S3ServiceImpl implements S3Service {
 
     @Autowired
     private AmazonS3 amazonS3;

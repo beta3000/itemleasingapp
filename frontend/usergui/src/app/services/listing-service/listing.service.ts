@@ -1,48 +1,48 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {Item} from '../../models/item';
+import {Listing} from '../../models/listing';
 import {AppConst} from '../../utils/app-const';
 
 @Injectable()
-export class ItemService {
+export class ListingService {
 
-  private itemServerPath: string = AppConst.itemServerPath;
+  private listingServerPath: string = AppConst.listingServerPath;
 
   constructor(private http:Http) { 
   }
 
-  addNewItem(
-  	name: string,
-  	status: string,
-  	description: string,
-  	itemCondition: string
+  addNewListing(
+  	listing: Listing
   ) {
-  	let url = this.itemServerPath + '/item';
-  	let itemInfo = {
-  		"name" : name,
-  		"status" : status,
-  		"description" : description,
-  		"itemCondition" : itemCondition
+  	let url = this.listingServerPath + '/listing/';
+  	let listingInfo = {
+  		"title": listing.title,
+  		"status": listing.status,
+  		"rate": listing.rate,
+  		"deposit": listing.deposit,
+  		"postDate": listing.postDate,
+  		"description": listing.description
   	}
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   	let header = new Headers({
       'Content-Type' : 'application/json',
       'Authorization' : 'Bearer '+currentUser.access_token
     });
 
-  	return this.http.post(url, JSON.stringify(itemInfo), {headers: header});
+  	return this.http.post(url, JSON.stringify(listingInfo), {headers: header});
   }
 
-  updateItem(item: Item) {
-    let url = this.itemServerPath + '/item/' + item.id;
-    let itemInfo = {
-      "id" : item.id,
-      "name" : item.name,
-      "status" : item.status,
-      "description" : item.description,
-      "itemCondition" : item.itemCondition
+  updateListing(listing: Listing) {
+    let url = this.listingServerPath + '/listing/' + listing.id;
+    let listingInfo = {
+      	"title": listing.title,
+  		"status": listing.status,
+  		"rate": listing.rate,
+  		"deposit": listing.deposit,
+  		"postDate": listing.postDate,
+  		"description": listing.description
     }
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -52,11 +52,11 @@ export class ItemService {
       'Authorization' : 'Bearer '+currentUser.access_token
     });
 
-    return this.http.put(url, JSON.stringify(itemInfo), {headers: header});
+    return this.http.put(url, JSON.stringify(listingInfo), {headers: header});
   }
 
-  deleteItemById(id: number) {
-    let url = this.itemServerPath + '/item/' + id;
+  deleteListingById(id: number) {
+    let url = this.listingServerPath + '/listing/' + id;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
 
@@ -69,8 +69,8 @@ export class ItemService {
 
   }
 
-  findItemsByUser() {
-    let url = this.itemServerPath + '/item/itemsByUser';
+  findListingsByUser() {
+    let url = this.listingServerPath + '/listing/listingsByUser';
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let header = new Headers({
       'Authorization' : 'Bearer '+currentUser.access_token
@@ -79,19 +79,20 @@ export class ItemService {
     return this.http.get(url, {headers: header});
   }
 
-  findAllItems() {
-    let url = this.itemServerPath + '/item/all';
+  findAlllistings() {
+    let url = this.listingServerPath + '/listing/all';
 
     return this.http.get(url);
   }
 
-  findItemById(id: number) {
-    let url = this.itemServerPath + '/item/' + id;
+  findListingById(id: number) {
+    let url = this.listingServerPath + '/listing/' + id;
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
     let header = new Headers({
       'Authorization' : 'Bearer '+currentUser.access_token
     });
     return this.http.get(url, {headers: header});
   }
+
 
 }

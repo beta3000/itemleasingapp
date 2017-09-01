@@ -13,9 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter{
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/v1/item/all",
-            "/v1/item/{id}",
-            "/v1/item/upload"
+            "/v1/listing/all",
     };
 
     @Override
@@ -23,7 +21,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS)
                 .permitAll()
-                .antMatchers(HttpMethod.GET, "/v1/item/**")
+                .antMatchers("/v1/listing/**")
                 .hasRole("USER")
                 .anyRequest()
                 .authenticated();
