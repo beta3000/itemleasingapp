@@ -30,9 +30,10 @@
       [headerCheckboxable]="true"
       [checkboxable]="true">
     </ngx-datatable-column>
-    <ngx-datatable-column [width]="50"  name="Name"></ngx-datatable-column>
+    <ngx-datatable-column [width]="50"  name="Title"></ngx-datatable-column>
     <ngx-datatable-column [width]="50"  name="Status"></ngx-datatable-column>
-    <ngx-datatable-column [width]="50"  name="Condition" prop="itemCondition"></ngx-datatable-column>
+    <ngx-datatable-column [width]="50"  name="Rate" prop="rate"></ngx-datatable-column>
+    <ngx-datatable-column [width]="50" name="Deposit"></ngx-datatable-column>
     <ngx-datatable-column [width]="400" name="Description"></ngx-datatable-column>
     <ngx-datatable-column [width]="50" name="Actions" sortable="false" prop="id">
        <template let-row="row" let-value="value" ngx-datatable-cell-template>
