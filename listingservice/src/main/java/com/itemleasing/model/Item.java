@@ -34,10 +34,9 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<ImageResource> imageList;
 
-    @ManyToOne
-    @JoinColumn(name="listing_id")
+    @OneToMany(mappedBy = "item")
     @JsonIgnore
-    private Listing listing;
+    private List<ItemToListing> itemToListingList;
 
     public Long getId() {
         return id;
@@ -103,11 +102,11 @@ public class Item {
         this.addDate = addDate;
     }
 
-    public Listing getListing() {
-        return listing;
+    public List<ItemToListing> getItemToListingList() {
+        return itemToListingList;
     }
 
-    public void setListing(Listing listing) {
-        this.listing = listing;
+    public void setItemToListingList(List<ItemToListing> itemToListingList) {
+        this.itemToListingList = itemToListingList;
     }
 }

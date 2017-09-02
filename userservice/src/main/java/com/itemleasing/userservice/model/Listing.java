@@ -1,6 +1,7 @@
 package com.itemleasing.userservice.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by z00382545 on 8/21/17.
@@ -17,7 +18,7 @@ public class Listing {
 
     @ManyToOne
     @JoinColumn(name="item_id")
-    private Item item;
+    private List<Item> itemList;
 
     public Long getId() {
         return id;
@@ -51,11 +52,11 @@ public class Listing {
         this.description = description;
     }
 
-    public Item getItem() {
-        return item;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 }

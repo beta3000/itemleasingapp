@@ -1,3 +1,5 @@
+import {Item} from "./item";
+
 export class Listing {
 	public id: number;
 	public title: string;
@@ -6,4 +8,5 @@ export class Listing {
 	public deposit: number;
 	public description: string;
 	public postDate: string;
+	public itemList: any[];
 }

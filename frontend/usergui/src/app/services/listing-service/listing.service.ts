@@ -21,7 +21,8 @@ export class ListingService {
   		"rate": listing.rate,
   		"deposit": listing.deposit,
   		"postDate": listing.postDate,
-  		"description": listing.description
+  		"description": listing.description,
+      "itemList" : listing.itemList
   	}
 
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));

@@ -5,9 +5,15 @@
 
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
-@import './assets/ngx-table-material-css.css';
+/*@import './assets/ngx-table-material-css.css';*/
 
 .pointer {
 	cursor: pointer;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 

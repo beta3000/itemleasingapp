@@ -23,46 +23,24 @@ export class AllItemsComponent implements OnInit {
     private http:Http,
     private route:ActivatedRoute
   	) {
-    this.fetch((data) => {
-      this.rows = data;
-    });
   }
 
-  fetch(cb) {
-    this.itemService.findAllItems().subscribe(
-      res => {
-        cb(res.json());
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  settings = {
+  columns: {
+    id: {
+      title: 'ID'
+    },
+    name: {
+      title: 'Full Name'
+    },
+    username: {
+      title: 'User Name'
+    },
+    email: {
+      title: 'Email'
+    }
   }
-
-  onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
-
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-  }
-
-  onActivate(event) {
-    if (event.type=="click") {
-    	this.router.navigate(['/itemDetail', event.row.id]);
-	}
-  }
-
-  add() {
-    this.selected.push(this.rows[1], this.rows[3]);
-  }
-
-  update() {
-    this.selected = [ this.rows[1], this.rows[3] ];
-  }
-
-  remove() {
-    this.selected = [];
-  }
+};
 
   ngOnInit() {}
 

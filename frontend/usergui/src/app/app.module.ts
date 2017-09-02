@@ -4,6 +4,7 @@ import { routing } from './app.routing';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as $ from 'jquery';
 
 import { AuthGuard } from './utils/auth.guard';
@@ -53,7 +54,8 @@ import { UpdateListingComponent } from './components/update-listing/update-listi
     HttpModule,
     routing,
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    Ng2SmartTableModule
   ],
   providers: [
     AuthGuard,

@@ -33,32 +33,12 @@
             <textarea rows="6" id="description" class="form-control" name="description" [(ngModel)]="listing.description"></textarea>
          </div>
       </div>
-      <ngx-datatable
-      class="material"
-      [rows]="rows"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [limit]="5"
-      [selected]="selected"
-      [selectionType]="'checkbox'"
-      (activate)="onActivate($event)"
-      (select)='onSelect($event)'>
-      <ngx-datatable-column
-      [width]="30"
-      [sortable]="false"
-      [canAutoResize]="false"
-      [draggable]="false"
-      [resizeable]="false"
-      [headerCheckboxable]="true"
-      [checkboxable]="true">
-      </ngx-datatable-column>
-      <ngx-datatable-column [width]="50"  name="Name"></ngx-datatable-column>
-      <ngx-datatable-column [width]="50"  name="Status"></ngx-datatable-column>
-      <ngx-datatable-column [width]="50"  name="Condition" prop="itemCondition"></ngx-datatable-column>
-      <ngx-datatable-column [width]="400" name="Description"></ngx-datatable-column>
-      </ngx-datatable>
+      <br><br>
+      <h6>Choose items for the listing</h6>
+      <div>
+         <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+      </div>
+      <br>
       <div class="form-group row">
          <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Submit</button>

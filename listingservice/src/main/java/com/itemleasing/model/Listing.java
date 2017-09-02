@@ -29,7 +29,8 @@ public class Listing {
     private String description;
 
     @OneToMany(mappedBy = "listing")
-    private List<Item> itemList;
+    @JsonIgnore
+    private List<ItemToListing> itemToListingList;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -92,12 +93,12 @@ public class Listing {
         this.postDate = postDate;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public List<ItemToListing> getItemToListingList() {
+        return itemToListingList;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItemToListingList(List<ItemToListing> itemToListingList) {
+        this.itemToListingList = itemToListingList;
     }
 
     public User getUser() {

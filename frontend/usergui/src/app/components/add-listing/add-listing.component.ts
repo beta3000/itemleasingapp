@@ -14,10 +14,40 @@ import {Params, ActivatedRoute, Router} from '@angular/router';
 export class AddListingComponent implements OnInit {
 
   private listingServerPath: string = AppConst.itemServerPath;
+  private selected;
   private listing: Listing = new Listing();
+  private data = [];
+  private settings = {
+    selectMode: 'multi',
 
-  rows = [];
-  selected = [];
+    columns: {
+      name: {
+        title: 'Item Name',
+        width: '130px'
+      },
+
+      status: {
+        title: 'Status',
+      },
+
+      addDate: {
+        title: 'Added Date',
+        width: '130px'
+      },
+
+      itemCondition: {
+        title: 'Condition'
+      },
+      
+      description: {
+        title: 'Description'
+      }
+    },
+
+
+    actions: false
+
+  };
 
   constructor(
   	private listingService: ListingService,
@@ -26,9 +56,6 @@ export class AddListingComponent implements OnInit {
     private http:Http,
     private route:ActivatedRoute
   	) { 
-    this.fetch((data) => {
-      this.rows = data;
-    });
   }
 
   onAddListing() {
@@ -43,55 +70,43 @@ export class AddListingComponent implements OnInit {
   	);
   }
 
-  fetch(cb) {
+  onUserRowSelect(event) { 
+    if(event.data != null) {
+      if(event.isSelected) {
+        this.listing.itemList.push(event.data); 
+      } else {
+        let index = this.listing.itemList.indexOf(event.data);
+        if(index >-1) {
+          this.listing.itemList.splice(index, 1); 
+        }
+      }
+    } else {
+      if (event.selected.length >0) {
+        this.listing.itemList = event.selected;
+      } else {
+        this.listing.itemList=[];
+      }
+    }
+
+    console.log(this.listing);
+  }
+
+  onAddItems() {
+    console.log('test');
+  }
+   
+
+  ngOnInit() {
+    this.listing.itemList = [];
     this.itemService.findItemsByUser().subscribe(
       res => {
         console.log(res);
-        cb(res.json());
+        this.data = res.json();
       },
       error => {
         console.log(error);
       }
     );
   }
-
-  onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
-
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-  }
-
-  onUpdate(id) {
-    this.router.navigate(['/updateItem', id])
-  }
-
-  onDelete(id) {
-    this.itemService.deleteItemById(id).subscribe(
-      res => {
-        console.log(res);
-      }, 
-      error => {
-        console.log(error.text());
-      }
-    );
-  }
-
-  onActivate(event) {
-  }
-
-  add() {
-    this.selected.push(this.rows[1], this.rows[3]);
-  }
-
-  update() {
-    this.selected = [ this.rows[1], this.rows[3] ];
-  }
-
-  remove() {
-    this.selected = [];
-  }
-
-  ngOnInit() {}
 
 }
