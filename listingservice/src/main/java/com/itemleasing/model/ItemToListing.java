@@ -21,6 +21,13 @@ public class ItemToListing {
     @JoinColumn(name = "listing_id")
     private Listing listing;
 
+    public ItemToListing(){}
+
+    public ItemToListing(Item item, Listing listing) {
+        this.item = item;
+        this.listing = listing;
+    }
+
     public Long getId() {
         return id;
     }

@@ -37,6 +37,9 @@ public class Listing {
     @JsonIgnore
     private User user;
 
+    @Transient
+    private List<Item> itemList;
+
     public Long getId() {
         return id;
     }
@@ -107,5 +110,13 @@ public class Listing {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 }
