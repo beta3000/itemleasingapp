@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppConst } from '../../utils/app-const';
 import { ItemService } from '../../services/item-service/item.service';
 import { Item } from '../../models/item';
 import {Http} from '@angular/http';
 import {Params, ActivatedRoute, Router} from '@angular/router';
-import { Modal } from 'ngx-modialog/plugins/bootstrap';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 // import {MockServerResultsService} from "./mock-server-results-service";
 // import {PagedData} from "./model/paged-data";
 // import {CorporateEmployee} from "./model/corporate-employee";
@@ -16,6 +16,8 @@ import { Modal } from 'ngx-modialog/plugins/bootstrap';
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
+  @ViewChild('modal')
+  modal: ModalComponent;
 
   private itemServerPath: string = AppConst.itemServerPath;
 
@@ -26,9 +28,8 @@ export class ItemListComponent implements OnInit {
     private router:Router,
     private http:Http,
     private route:ActivatedRoute,
-    public modal: Modal
     ) {
-    
+
   }
 
   private selected;
@@ -75,26 +76,42 @@ export class ItemListComponent implements OnInit {
   }
 
   onDelete(event) {
-    this.modal.confirm()
-    .size('lg')
-    .isBlocking(true)
-    .showClose(true)
-    .keyboard(27)
-    .title('Hello World')
-    .body('A Customized Modal')
-    .open();
+    console.log(event);
+    this.selected = event.data;
+    this.modal.open();
   }
 
-  ngOnInit() {
-    this.itemService.findItemsByUser().subscribe(
+  dismissed() {
+  }
+
+  closed() {
+    console.log(this.selected);
+    this.itemService.deleteItemById(this.selected.id).subscribe(
       res => {
-        console.log(res.json());
-        this.data = res.json();
+        location.reload();
       },
       error => {
         console.log(error.text());
       }
     );
+  }
+
+  opened() {
+  }
+
+  open() {
+    this.modal.open();
+  }
+
+  ngOnInit() {
+    this.itemService.findItemsByUser().subscribe(
+      res => {
+        this.data = res.json();
+      },
+      error => {
+        console.log(error.text());
+      }
+      );
   }
 
 

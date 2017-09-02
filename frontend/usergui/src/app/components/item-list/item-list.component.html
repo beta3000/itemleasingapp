@@ -14,4 +14,16 @@
       </div>
   </div>
 
+<modal #modal (onClose)="closed(event)" (onDismiss)="dismissed(event)" (onOpen)="opened(event)">
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Confirm Deleting</h4>
+    </modal-header>
+    <modal-body>
+        Are you sure you want to delete?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close()">Ok</button>
+    </modal-footer>
+</modal>
 </div>

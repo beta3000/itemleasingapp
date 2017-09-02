@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule, Modal, bootstrap4Mode } from 'ngx-modialog/plugins/bootstrap';
 // run the plugin to work with version 4 of bootstrap
 bootstrap4Mode();
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 import { AuthGuard } from './utils/auth.guard';
 
@@ -63,7 +64,8 @@ import { AllListingsComponent } from './components/all-listings/all-listings.com
     NgxDatatableModule,
     Ng2SmartTableModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    Ng2Bs3ModalModule
   ],
   providers: [
     AuthGuard,
