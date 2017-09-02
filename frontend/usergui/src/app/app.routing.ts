@@ -13,7 +13,7 @@ import {UpdateItemComponent} from './components/update-item/update-item.componen
 import {ListingsComponent} from './components/listings/listings.component';
 import {AddListingComponent} from './components/add-listing/add-listing.component';
 import {UpdateListingComponent} from './components/update-listing/update-listing.component';
-
+import {AllListingsComponent} from './components/all-listings/all-listings.component';
 
 const appRoutes: Routes = [
 	{
@@ -64,6 +64,10 @@ const appRoutes: Routes = [
 	{
 		path: 'updateListing/:id',
 		component: UpdateListingComponent, canActivate: [AuthGuard]
+	},
+	{
+		path: 'allListings',
+		component: AllListingsComponent
 	}
 ];
 

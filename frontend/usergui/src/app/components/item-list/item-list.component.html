@@ -9,42 +9,9 @@
     <h3>
       My Items
     </h3>
-      <ngx-datatable
-      class="material"
-      [rows]="rows"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [rowHeight]="'auto'"
-      [limit]="5"
-      [selected]="selected"
-      [selectionType]="'checkbox'"
-      (activate)="onActivate($event)"
-      (select)='onSelect($event)'>
-      <ngx-datatable-column
-      [width]="30"
-      [sortable]="false"
-      [canAutoResize]="false"
-      [draggable]="false"
-      [resizeable]="false"
-      [headerCheckboxable]="true"
-      [checkboxable]="true">
-    </ngx-datatable-column>
-    <ngx-datatable-column [width]="50"  name="Name"></ngx-datatable-column>
-    <ngx-datatable-column [width]="50"  name="Status"></ngx-datatable-column>
-    <ngx-datatable-column [width]="50"  name="Condition" prop="itemCondition"></ngx-datatable-column>
-    <ngx-datatable-column [width]="400" name="Description"></ngx-datatable-column>
-    <ngx-datatable-column [width]="50" name="Actions" sortable="false" prop="id">
-       <template let-row="row" let-value="value" ngx-datatable-cell-template>
-        <button md-icon-button class="pointer" (click)="onUpdate(value)" [disabled]="row['status']==='BLOCKED'">
-            <i class="fa fa-pencil-square-o"></i>
-        </button>
-        <button md-icon-button class="pointer" (click)="onDelete(value)" [disabled]="row['status']==='APPROVED'">
-            <i class="fa fa-times"></i>
-        </button>
-    </template>
-    </ngx-datatable-column>
-
-  </ngx-datatable>
+      <div>
+         <ng2-smart-table [settings]="settings" [source]="data" (edit)="onEdit($event)" (delete)="onDelete($event)"></ng2-smart-table>
+      </div>
   </div>
+
 </div>

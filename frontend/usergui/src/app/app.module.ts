@@ -6,6 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import * as $ from 'jquery';
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule, Modal, bootstrap4Mode } from 'ngx-modialog/plugins/bootstrap';
+// run the plugin to work with version 4 of bootstrap
+bootstrap4Mode();
 
 import { AuthGuard } from './utils/auth.guard';
 
@@ -31,6 +35,7 @@ import { UpdateItemComponent } from './components/update-item/update-item.compon
 import { ListingsComponent } from './components/listings/listings.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
+import { AllListingsComponent } from './components/all-listings/all-listings.component';
 
 
 @NgModule({
@@ -47,7 +52,8 @@ import { UpdateListingComponent } from './components/update-listing/update-listi
     UpdateItemComponent,
     ListingsComponent,
     AddListingComponent,
-    UpdateListingComponent
+    UpdateListingComponent,
+    AllListingsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,9 @@ import { UpdateListingComponent } from './components/update-listing/update-listi
     routing,
     FormsModule,
     NgxDatatableModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [
     AuthGuard,

@@ -80,7 +80,7 @@ export class ListingService {
     return this.http.get(url, {headers: header});
   }
 
-  findAlllistings() {
+  findAllListings() {
     let url = this.listingServerPath + '/listing/all';
 
     return this.http.get(url);
