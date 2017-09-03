@@ -91,15 +91,44 @@ public class ListingServiceImpl implements ListingService {
             localListing.setDeposit(listing.getDeposit());
             localListing.setRate(listing.getRate());
             localListing.setTitle(listing.getTitle());
-//            localListing.setItemList(listing.getItemList());
 
-            return listingRepository.save(localListing);
+            Listing targetListing = listingRepository.save(localListing);
+
+            itemToListingService.removeItemToListingByListing(listing);
+
+            List<Long> idList = new ArrayList<>();
+
+            for (Item item : listing.getItemList()) {
+                idList.add(item.getId());
+            }
+
+            for (Long id : idList) {
+                Item item = itemService.getItemById(id);
+                ItemToListing itemToListing = new ItemToListing(item, targetListing);
+                itemToListingService.createItemToListing(itemToListing);
+            }
+
+            return targetListing;
         }
     }
 
     @Override
     public void deleteListingById(Long id) {
         listingRepository.delete(id);
+    }
+
+    @Override
+    public List<Item> findItemsByListingId(Long id) {
+        Listing listing = listingRepository.findOne(id);
+        List<ItemToListing> itemToListingList = itemToListingService.findItemToListingByListing(listing);
+        List<Item> itemList = new ArrayList<>();
+
+        for (ItemToListing itemToListing : itemToListingList) {
+            Item item = itemToListing.getItem();
+            itemList.add(item);
+        }
+
+        return itemList;
     }
 
 }

@@ -43,7 +43,8 @@ export class ListingService {
   		"rate": listing.rate,
   		"deposit": listing.deposit,
   		"postDate": listing.postDate,
-  		"description": listing.description
+  		"description": listing.description,
+      "itemList" : listing.itemList
     }
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -95,5 +96,13 @@ export class ListingService {
     return this.http.get(url, {headers: header});
   }
 
+  findItemsByListingId(id: number) {
+    let url = this.listingServerPath + '/listing/' + id + '/item';
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let header = new Headers({
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+    return this.http.get(url, {headers: header});
+  }
 
 }

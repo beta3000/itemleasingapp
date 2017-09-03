@@ -92,7 +92,6 @@ export class AddListingComponent implements OnInit {
   }
 
   onAddItems() {
-    console.log('test');
   }
    
 

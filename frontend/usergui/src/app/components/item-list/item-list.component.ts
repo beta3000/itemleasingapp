@@ -5,10 +5,6 @@ import { Item } from '../../models/item';
 import {Http} from '@angular/http';
 import {Params, ActivatedRoute, Router} from '@angular/router';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
-// import {MockServerResultsService} from "./mock-server-results-service";
-// import {PagedData} from "./model/paged-data";
-// import {CorporateEmployee} from "./model/corporate-employee";
-// import {Page} from "./model/page";
 
 @Component({
   selector: 'app-item-list',

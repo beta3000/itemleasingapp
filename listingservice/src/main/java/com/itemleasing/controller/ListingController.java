@@ -1,6 +1,7 @@
 package com.itemleasing.controller;
 
 import com.itemleasing.config.ServiceConfig;
+import com.itemleasing.model.Item;
 import com.itemleasing.model.Listing;
 import com.itemleasing.service.ListingService;
 import com.itemleasing.utils.tokenParser;
@@ -71,6 +72,11 @@ public class ListingController {
     @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
     public void deleteListingById(@PathVariable Long id) throws IOException {
         listingService.deleteListingById(id);
+    }
+
+    @RequestMapping("/{id}/item")
+    public List<Item> getItemsByListingId(@PathVariable Long id) {
+        return listingService.findItemsByListingId(id);
     }
 
 }

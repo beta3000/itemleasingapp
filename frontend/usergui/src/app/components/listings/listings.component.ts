@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppConst } from '../../utils/app-const';
 import { ListingService } from '../../services/listing-service/listing.service';
 import { Item } from '../../models/item';
 import {Http} from '@angular/http';
 import {Params, ActivatedRoute, Router} from '@angular/router';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 
 @Component({
   selector: 'app-listings',
@@ -11,11 +13,12 @@ import {Params, ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./listings.component.css']
 })
 export class ListingsComponent implements OnInit {
+  @ViewChild('modal')
+  modal: ModalComponent;
 
   private itemServerPath: string = AppConst.itemServerPath;
-
-  rows = [];
-  selected = [];
+  private selected;
+  private data = [];
 
   constructor(
     private listingService: ListingService,
@@ -23,61 +26,87 @@ export class ListingsComponent implements OnInit {
     private http:Http,
     private route:ActivatedRoute
     ) {
-    this.fetch((data) => {
-      this.rows = data;
-    });
   }
 
-  fetch(cb) {
-    this.listingService.findListingsByUser().subscribe(
-      res => {
-        console.log(res);
-        cb(res.json());
+  private settings = {
+    mode: 'external',
+
+    selectMode: 'multi',
+
+    columns: {
+      title: {
+        title: 'Title',
+        width: '300px'
       },
-      error => {
-        console.log(error);
+
+      status: {
+        title: 'Status',
+      },
+
+      rate: {
+        title: 'Rate'
+      },
+
+      deposit: {
+        title: 'Deposit'
+      },
+      
+      postDate: {
+        title: 'Post Date'
       }
-    );
+    },
+
+    actions: {
+      add: false,
+      position: 'right'
+    }
+
+  };
+
+  onEdit(event){
+    console.log(event);
+    this.router.navigate(['/updateListing', event.data.id]);
   }
 
-  onSelect({ selected }) {
-    console.log('Select Event', selected, this.selected);
-
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
+  onDelete(event) {
+    console.log(event);
+    this.selected = event.data;
+    this.modal.open();
   }
 
-  onUpdate(id) {
-    this.router.navigate(['/updateListing', id])
+  dismissed() {
   }
 
-  onDelete(id) {
-    this.listingService.deleteListingById(id).subscribe(
+  closed() {
+    console.log(this.selected);
+    this.listingService.deleteListingById(this.selected.id).subscribe(
       res => {
-        console.log(res);
-      }, 
+        location.reload();
+      },
       error => {
         console.log(error.text());
       }
     );
   }
 
-  onActivate(event) {
+  opened() {
   }
 
-  add() {
-    this.selected.push(this.rows[1], this.rows[3]);
+  open() {
+    this.modal.open();
   }
 
-  update() {
-    this.selected = [ this.rows[1], this.rows[3] ];
-  }
+  ngOnInit() {
+    this.listingService.findAllListings().subscribe(
+      res => {
+        this.data = res.json();
+      },
 
-  remove() {
-    this.selected = [];
+      error => {
+        console.log(error.text());
+      }
+    );
   }
-
-  ngOnInit() {}
 
 
 }

@@ -1,5 +1,6 @@
 package com.itemleasing.service;
 
+import com.itemleasing.model.Item;
 import com.itemleasing.model.Listing;
 
 import java.io.IOException;
@@ -21,4 +22,6 @@ public interface ListingService {
     Listing updateListing(Listing listing) throws IOException;
 
     void deleteListingById(Long id);
+
+    List<Item> findItemsByListingId(Long id);
 }
