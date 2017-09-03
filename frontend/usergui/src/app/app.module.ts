@@ -37,6 +37,7 @@ import { ListingsComponent } from './components/listings/listings.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
 import { AllListingsComponent } from './components/all-listings/all-listings.component';
+import { ListingDetailComponent } from './components/listing-detail/listing-detail.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { AllListingsComponent } from './components/all-listings/all-listings.com
     ListingsComponent,
     AddListingComponent,
     UpdateListingComponent,
-    AllListingsComponent
+    AllListingsComponent,
+    ListingDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -49,6 +49,11 @@ export class AllListingsComponent implements OnInit {
     private route:ActivatedRoute
   ) { }
 
+  onUserRowSelect(event) {
+    console.log(event);
+    this.router.navigate(['/listingDetail', event.data.id]);
+  }
+
   ngOnInit() {
   	this.listingService.findAllListings().subscribe(
   		res => {

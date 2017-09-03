@@ -14,6 +14,7 @@ import {ListingsComponent} from './components/listings/listings.component';
 import {AddListingComponent} from './components/add-listing/add-listing.component';
 import {UpdateListingComponent} from './components/update-listing/update-listing.component';
 import {AllListingsComponent} from './components/all-listings/all-listings.component';
+import {ListingDetailComponent} from './components/listing-detail/listing-detail.component';
 
 const appRoutes: Routes = [
 	{
@@ -68,7 +69,11 @@ const appRoutes: Routes = [
 	{
 		path: 'allListings',
 		component: AllListingsComponent
-	}
+	},
+	{
+		path: 'listingDetail/:id',
+		component: ListingDetailComponent
+	},
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
