@@ -97,7 +97,7 @@ export class ListingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listingService.findAllListings().subscribe(
+    this.listingService.findListingsByUser().subscribe(
       res => {
         this.data = res.json();
       },
