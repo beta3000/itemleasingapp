@@ -15,6 +15,7 @@ import {AddListingComponent} from './components/add-listing/add-listing.componen
 import {UpdateListingComponent} from './components/update-listing/update-listing.component';
 import {AllListingsComponent} from './components/all-listings/all-listings.component';
 import {ListingDetailComponent} from './components/listing-detail/listing-detail.component';
+import {AddLeaseComponent} from './components/add-lease/add-lease.component';
 
 const appRoutes: Routes = [
 	{
@@ -74,6 +75,10 @@ const appRoutes: Routes = [
 		path: 'listingDetail/:id',
 		component: ListingDetailComponent
 	},
+	{
+		path: 'addLease/:id', 
+		component: AddLeaseComponent, canActivate: [AuthGuard]
+	}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

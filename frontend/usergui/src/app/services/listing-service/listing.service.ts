@@ -89,20 +89,14 @@ export class ListingService {
 
   findListingById(id: number) {
     let url = this.listingServerPath + '/listing/' + id;
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let header = new Headers({
-      'Authorization' : 'Bearer '+currentUser.access_token
-    });
-    return this.http.get(url, {headers: header});
+    
+    return this.http.get(url);
   }
 
   findItemsByListingId(id: number) {
     let url = this.listingServerPath + '/listing/' + id + '/item';
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let header = new Headers({
-      'Authorization' : 'Bearer '+currentUser.access_token
-    });
-    return this.http.get(url, {headers: header});
+    
+    return this.http.get(url);
   }
 
 }

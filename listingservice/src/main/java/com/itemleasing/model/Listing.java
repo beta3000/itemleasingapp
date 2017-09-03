@@ -34,7 +34,6 @@ public class Listing {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonIgnore
     private User user;
 
     @Transient

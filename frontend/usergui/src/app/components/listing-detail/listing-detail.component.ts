@@ -24,6 +24,10 @@ export class ListingDetailComponent implements OnInit {
 		private route:ActivatedRoute
 		) { }
 
+	onStartLeasing() {
+		this.router.navigate(['/addLease', this.listingId]);
+	}
+
 	ngOnInit() {
 		this.route.params.forEach((params: Params) => {
 			this.listingId = Number.parseInt(params['id']);

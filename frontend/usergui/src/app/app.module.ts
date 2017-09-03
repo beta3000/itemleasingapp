@@ -38,6 +38,7 @@ import { AddListingComponent } from './components/add-listing/add-listing.compon
 import { UpdateListingComponent } from './components/update-listing/update-listing.component';
 import { AllListingsComponent } from './components/all-listings/all-listings.component';
 import { ListingDetailComponent } from './components/listing-detail/listing-detail.component';
+import { AddLeaseComponent } from './components/add-lease/add-lease.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ListingDetailComponent } from './components/listing-detail/listing-deta
     AddListingComponent,
     UpdateListingComponent,
     AllListingsComponent,
-    ListingDetailComponent
+    ListingDetailComponent,
+    AddLeaseComponent
   ],
   imports: [
     BrowserModule,
