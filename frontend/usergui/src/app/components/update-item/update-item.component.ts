@@ -51,7 +51,14 @@ export class UpdateItemComponent implements OnInit {
         formData.append('id', this.itemId+'');
 
         let url = this.itemServerPath + '/item/' + this.itemId;
-        this.http.post(this.itemServerPath + '/item/upload', formData)
+
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        let header = new Headers({
+          'Authorization' : 'Bearer '+currentUser.access_token
+        });
+
+        this.http.post(this.itemServerPath + '/item/upload', formData, {headers: header})
         .subscribe(
           res => {
             console.log(res.json);

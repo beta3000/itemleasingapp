@@ -69,8 +69,8 @@ public class S3ServiceImpl implements S3Service{
                         String filePath = user.getUsername()+"_"+user.getId()+"/"+
                                 item.getName()+"_"+item.getId()+"/" + fileName;
 
-                        putObjectResults.add(upload(multipartFile.getInputStream(), "https://s3.amazonaws.com/ldeng-test/"+filePath));
-                        imageResourceService.saveImageResource(item, filePath);
+                        putObjectResults.add(upload(multipartFile.getInputStream(), filePath));
+                        imageResourceService.saveImageResource(item, "https://s3.amazonaws.com/ldeng-test/"+filePath);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

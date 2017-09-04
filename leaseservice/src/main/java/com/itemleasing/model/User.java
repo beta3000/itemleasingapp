@@ -16,7 +16,7 @@ import java.util.*;
  */
 
 @Entity
-public class User implements Serializable, UserDetails {
+public class User implements Serializable {
 
     private static final long serialVersionUID = -9138461153733765604L;
     @Id
@@ -139,33 +139,5 @@ public class User implements Serializable, UserDetails {
         this.leaseListForLessor = leaseListForLessor;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-        return authorities;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
