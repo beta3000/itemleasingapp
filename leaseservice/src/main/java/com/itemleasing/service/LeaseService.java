@@ -14,4 +14,11 @@ public interface LeaseService {
     List<Lease> findLeasesByLessor(User lessor);
 
     List<Lease> findLeasesByLessee(User lessee);
+
+    Lease acceptLeaseRequestById(Long id);
+
+    Lease rejectLeaseRequestById(Long id);
+
+    Lease findLeaseById(Long id);
+
 }

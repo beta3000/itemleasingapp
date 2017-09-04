@@ -45,4 +45,25 @@ public class LeaseServiceImpl implements LeaseService{
     public List<Lease> findLeasesByLessee(User lessee) {
         return leaseRepository.findByLessee(lessee);
     }
+
+    @Override
+    public Lease findLeaseById(Long id) {
+        return leaseRepository.findOne(id);
+    }
+
+    @Override
+    public Lease acceptLeaseRequestById(Long id) {
+        Lease lease = findLeaseById(id);
+        lease.setStatus("accepted");
+        leaseRepository.save(lease);
+        return lease;
+    }
+
+    @Override
+    public Lease rejectLeaseRequestById(Long id) {
+        Lease lease = findLeaseById(id);
+        lease.setStatus("rejected");
+        leaseRepository.save(lease);
+        return lease;
+    }
 }

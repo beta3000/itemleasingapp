@@ -73,4 +73,14 @@ public class LeaseController {
 
         return leaseService.findLeasesByLessee(lessee);
     }
+
+    @RequestMapping("/accept/{id}")
+    public Lease acceptLeaseRequest(@PathVariable Long id){
+        return leaseService.acceptLeaseRequestById(id);
+    }
+
+    @RequestMapping("/reject/{id}")
+    public Lease rejectLeaseRequest(@PathVariable Long id) {
+        return leaseService.rejectLeaseRequestById(id);
+    }
 }

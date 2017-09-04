@@ -60,4 +60,30 @@ export class LeaseService {
     return this.http.get(url, {headers: header});
   }
 
+  acceptLeaseRequestById(id: number) {
+    let url = this.leaseServerPath + '/lease/accept/' + id;
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let header = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.get(url, {headers: header});
+  }
+
+  rejectLeaseRequestById(id: number) {
+    let url = this.leaseServerPath + '/lease/reject/' + id;
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let header = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.get(url, {headers: header});
+  }
+
 }

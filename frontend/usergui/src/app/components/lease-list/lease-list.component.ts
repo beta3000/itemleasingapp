@@ -16,9 +16,10 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class LeaseListComponent implements OnInit {
 
   private selected;
-  private leases = [];
+  private lessorLeases = [];
+  private lesseeLeases = [];
   private source: LocalDataSource;
-  private settings = {
+  private lessorSettings = {
 
     columns: {
       startDate: {
@@ -37,6 +38,14 @@ export class LeaseListComponent implements OnInit {
         title: 'Lessor',
         valuePrepareFunction: (lessor) => {
           return lessor.username;
+        },
+        filterFunction(lessor?: any, search?: string): boolean {
+          let match = lessor.username.indexOf(search) > -1
+          if (match || search === '') {
+            return true;
+          } else {
+            return false;
+          }
         }
       },
 
@@ -44,44 +53,144 @@ export class LeaseListComponent implements OnInit {
       	title: 'Lessee',
         valuePrepareFunction: (lessee) => {
           return lessee.username;
+        },
+        filterFunction(lessee?: any, search?: string): boolean {
+          let match = lessee.username.indexOf(search) > -1
+          if (match || search === '') {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    },
+
+    actions: {
+      custom: [
+      {
+        name: 'accept',
+        title: 'Accept ',
+      },
+      {
+        name: 'reject',
+        title: 'Reject ',
+      }
+      ],
+
+      add: false,
+
+      edit: false,
+
+      delete: false,
+
+      position: 'right'
+    },
+  };
+
+  private lesseeSettings = {
+
+    columns: {
+      startDate: {
+        title: 'Start Date',
+      },
+
+      endDate: {
+        title: 'End Date',
+      },
+
+      status: {
+        title: 'Status'
+      },
+      
+      lessor: {
+        title: 'Lessor',
+        valuePrepareFunction: (lessor) => {
+          return lessor.username;
+        },
+        filterFunction(lessor?: any, search?: string): boolean {
+          let match = lessor.username.indexOf(search) > -1
+          if (match || search === '') {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      },
+
+      lessee: {
+        title: 'Lessee',
+        valuePrepareFunction: (lessee) => {
+          return lessee.username;
+        },
+        filterFunction(lessee?: any, search?: string): boolean {
+          let match = lessee.username.indexOf(search) > -1
+          if (match || search === '') {
+            return true;
+          } else {
+            return false;
+          }
         }
       }
     },
 
     actions: false
-
   };
 
   constructor(
   	private itemService: ItemService,
-	  private listingService: ListingService,
+    private listingService: ListingService,
     private leaseService: LeaseService,
-	  private router:Router,
-	  private http:Http,
-	  private route:ActivatedRoute
-  ) { }
+    private router:Router,
+    private http:Http,
+    private route:ActivatedRoute
+    ) { }
+
+  onCustom(event) {
+    console.log(event);
+    if (event.action === 'accept') {
+      this.leaseService.acceptLeaseRequestById(event.data.id).subscribe(
+        res => {
+          console.log(res.json());
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+
+    if (event.action === 'reject') {
+      this.leaseService.rejectLeaseRequestById(event.data.id).subscribe(
+        res => {
+          console.log(res.json());
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+  }
 
   ngOnInit() {
     this.leaseService.findLeasesByLessor().subscribe(
       res1 => {
-        this.leases = res1.json();
-        this.leaseService.findLeasesByLessee().subscribe(
-          res2 => {
-            this.leases.push.apply(this.leases, res2.json());
-            console.log(this.leases);
-            this.source = new LocalDataSource(this.leases);
-          },
-
-          error2 => {
-            console.log(error2);
-          }
-        );
+        this.lessorLeases = res1.json();
+        
       },
 
       error1 => {
         console.log(error1);
       }
-    );
+      );
+
+    this.leaseService.findLeasesByLessee().subscribe(
+      res2 => {
+        this.lesseeLeases = res2.json()
+      },
+
+      error2 => {
+        console.log(error2);
+      }
+      );
   }
 
 }
