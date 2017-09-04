@@ -19,6 +19,7 @@ import { UserService } from './services/user-service/user.service';
 import { ItemService } from './services/item-service/item.service';
 import { LoginService } from './services/login-service/login.service';
 import { ListingService } from './services/listing-service/listing.service';
+import { LeaseService } from './services/lease-service/lease.service';
 import { MockServerResultsService } from './components/item-list/mock-server-results-service';
 
 
@@ -39,6 +40,7 @@ import { UpdateListingComponent } from './components/update-listing/update-listi
 import { AllListingsComponent } from './components/all-listings/all-listings.component';
 import { ListingDetailComponent } from './components/listing-detail/listing-detail.component';
 import { AddLeaseComponent } from './components/add-lease/add-lease.component';
+import { LeaseListComponent } from './components/lease-list/lease-list.component';
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import { AddLeaseComponent } from './components/add-lease/add-lease.component';
     UpdateListingComponent,
     AllListingsComponent,
     ListingDetailComponent,
-    AddLeaseComponent
+    AddLeaseComponent,
+    LeaseListComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ import { AddLeaseComponent } from './components/add-lease/add-lease.component';
     ItemService,
     LoginService,
     ListingService,
+    LeaseService,
   	MockServerResultsService
   ],
   bootstrap: [AppComponent]

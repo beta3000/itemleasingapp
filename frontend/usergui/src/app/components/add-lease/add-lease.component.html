@@ -1,24 +1,24 @@
 <div class="container">
-	<form>
+	<form (ngSubmit)="onNewLeaseRequest()">
   <div class="form-row">
     <div class="form-group col-md-5">
       <label for="startDate" class="col-form-label">Start Date</label>
-      <input type="date" class="form-control" id="startDate">
+      <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="lease.startDate">
     </div>
     <div class="form-group col-md-5">
       <label for="endDate" class="col-form-label">End Date</label>
-      <input type="date" class="form-control" id="endDate">
+      <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="lease.endDate">
     </div>
     <div class="form-group col-md-2">
       <label for="duration" class="col-form-label">Duration</label>
-      <input type="number" class="form-control" id="duration" disabled>
+      <input type="number" class="form-control" id="duration" disabled name="duration">
     </div>
   </div>
   
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="lesser" class="col-form-label">Lesser</label>
-      <input type="text" class="form-control" id="lesser" disabled name="lesser" [(ngModel)]="lesser.username">
+      <label for="lessor" class="col-form-label">Lessor</label>
+      <input type="text" class="form-control" id="lessor" disabled name="lessor" [(ngModel)]="lessor.username">
     </div>
     <div class="form-group col-md-3">
       <label for="rate" class="col-form-label">Rate</label>
