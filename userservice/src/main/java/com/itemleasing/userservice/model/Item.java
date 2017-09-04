@@ -1,5 +1,8 @@
 package com.itemleasing.userservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -15,16 +18,25 @@ public class Item {
     private Long id;
     private String name;
     private String status;
+
+    @Column(columnDefinition="text")
     private String description;
     private String itemCondition;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date addDate;
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "item")
     private List<ImageResource> imageList;
+
+    @OneToMany(mappedBy = "item")
+    @JsonIgnore
+    private List<ItemToListing> itemToListingList;
 
     public Long getId() {
         return id;
@@ -88,5 +100,13 @@ public class Item {
 
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
+    }
+
+    public List<ItemToListing> getItemToListingList() {
+        return itemToListingList;
+    }
+
+    public void setItemToListingList(List<ItemToListing> itemToListingList) {
+        this.itemToListingList = itemToListingList;
     }
 }

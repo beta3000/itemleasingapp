@@ -1,8 +1,8 @@
 package com.itemleasing.userservice.model.security;
 
 
-
 import com.itemleasing.userservice.model.User;
+import com.itemleasing.userservice.model.security.Role;
 
 import javax.persistence.*;
 import java.io.Serializable;

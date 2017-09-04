@@ -1,31 +1,31 @@
 package com.itemleasing.userservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 /**
- * Created by z00382545 on 8/21/17.
+ * Created by z00382545 on 9/1/17.
  */
 
 @Entity
-public class ImageResource {
+public class ItemToListing {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="item_id")
-    @JsonIgnore
+    @JoinColumn(name = "item_id")
     private Item item;
 
-    private String imageUrl;
+    @ManyToOne
+    @JoinColumn(name = "listing_id")
+    private Listing listing;
 
-    public ImageResource(){}
+    public ItemToListing(){}
 
-    public ImageResource(Item item, String imageUrl) {
+    public ItemToListing(Item item, Listing listing) {
         this.item = item;
-        this.imageUrl = imageUrl;
+        this.listing = listing;
     }
 
     public Long getId() {
@@ -44,11 +44,11 @@ public class ImageResource {
         this.item = item;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Listing getListing() {
+        return listing;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setListing(Listing listing) {
+        this.listing = listing;
     }
 }

@@ -2,6 +2,7 @@ package com.itemleasing.itemservice.model.security;
 
 
 import com.itemleasing.itemservice.model.User;
+import com.itemleasing.itemservice.model.security.Role;
 
 import javax.persistence.*;
 import java.io.Serializable;

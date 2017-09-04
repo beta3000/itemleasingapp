@@ -1,4 +1,4 @@
-package com.itemleasing.userservice.model;
+package com.itemleasing.authentication.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

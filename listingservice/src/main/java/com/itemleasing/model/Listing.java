@@ -36,6 +36,10 @@ public class Listing {
     @JoinColumn(name="user_id")
     private User user;
 
+    @OneToMany(mappedBy = "listing")
+    @JsonIgnore
+    private List<Lease> leaseList;
+
     @Transient
     private List<Item> itemList;
 
@@ -117,5 +121,13 @@ public class Listing {
 
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
+    }
+
+    public List<Lease> getLeaseList() {
+        return leaseList;
+    }
+
+    public void setLeaseList(List<Lease> leaseList) {
+        this.leaseList = leaseList;
     }
 }

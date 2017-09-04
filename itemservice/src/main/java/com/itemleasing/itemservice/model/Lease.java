@@ -1,4 +1,4 @@
-package com.itemleasing.userservice.model;
+package com.itemleasing.itemservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

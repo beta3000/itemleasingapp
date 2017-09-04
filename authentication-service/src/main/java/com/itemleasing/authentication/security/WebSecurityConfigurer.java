@@ -1,7 +1,6 @@
 package com.itemleasing.authentication.security;
 
 import com.itemleasing.authentication.service.UserSecurityService;
-import com.itemleasing.authentication.utils.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

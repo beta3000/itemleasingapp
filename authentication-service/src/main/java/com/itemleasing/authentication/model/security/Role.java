@@ -1,4 +1,4 @@
-package com.itemleasing.authentication.model;
+package com.itemleasing.authentication.model.security;
 
 import javax.persistence.*;
 import java.io.Serializable;

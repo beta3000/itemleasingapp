@@ -2,12 +2,13 @@ package com.itemleasing.authentication.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.itemleasing.authentication.model.security.Authority;
+import com.itemleasing.authentication.model.security.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.rmi.dgc.Lease;
 import java.util.*;
 
 /**
@@ -15,10 +16,11 @@ import java.util.*;
  */
 
 @Entity
-public class User implements UserDetails {
+public class User implements Serializable, UserDetails {
 
-
+    private static final long serialVersionUID = -9138461153733765604L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
@@ -32,6 +34,22 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Item> itemList;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Listing> listings;
+
+    @OneToMany(mappedBy = "lessee")
+    @JsonIgnore
+    private List<Lease> leaseListForLessee;
+
+    @OneToMany(mappedBy = "lessor")
+    @JsonIgnore
+    private List<Lease> leaseListForLessor;
 
     public Long getId() {
         return id;
@@ -89,12 +107,36 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+
+    public List<Listing> getListings() {
+        return listings;
+    }
+
+    public void setListings(List<Listing> listings) {
+        this.listings = listings;
+    }
+
+    public List<Lease> getLeaseListForLessee() {
+        return leaseListForLessee;
+    }
+
+    public void setLeaseListForLessee(List<Lease> leaseListForLessee) {
+        this.leaseListForLessee = leaseListForLessee;
+    }
+
+    public List<Lease> getLeaseListForLessor() {
+        return leaseListForLessor;
+    }
+
+    public void setLeaseListForLessor(List<Lease> leaseListForLessor) {
+        this.leaseListForLessor = leaseListForLessor;
     }
 
     @Override
@@ -126,5 +168,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }
