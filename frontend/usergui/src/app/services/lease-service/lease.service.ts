@@ -86,4 +86,17 @@ export class LeaseService {
     return this.http.get(url, {headers: header});
   }
 
+  findLeaseById(id: number) {
+    let url = this.leaseServerPath + '/lease/' + id;
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    let header = new Headers({
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer '+currentUser.access_token
+    });
+
+    return this.http.get(url, {headers: header});
+  }
+
 }

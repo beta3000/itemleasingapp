@@ -17,6 +17,7 @@ import {AllListingsComponent} from './components/all-listings/all-listings.compo
 import {ListingDetailComponent} from './components/listing-detail/listing-detail.component';
 import {AddLeaseComponent} from './components/add-lease/add-lease.component';
 import {LeaseListComponent} from './components/lease-list/lease-list.component';
+import {LeaseDetailComponent} from './components/lease-detail/lease-detail.component';
 
 const appRoutes: Routes = [
 	{
@@ -83,6 +84,10 @@ const appRoutes: Routes = [
 	{
 		path: 'leases',
 		component: LeaseListComponent, canActivate: [AuthGuard]
+	},
+	{
+		path: 'leaseDetail/:id',
+		component: LeaseDetailComponent, canActivate: [AuthGuard]
 	}
 ];
 

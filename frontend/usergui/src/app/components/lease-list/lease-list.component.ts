@@ -16,10 +16,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class LeaseListComponent implements OnInit {
 
   private selected;
-  private lessorLeases = [];
-  private lesseeLeases = [];
   private source: LocalDataSource;
-  private lessorSettings = {
+  private leases = [];
+  private Settings = {
 
     columns: {
       startDate: {
@@ -67,14 +66,10 @@ export class LeaseListComponent implements OnInit {
 
     actions: {
       custom: [
-      {
-        name: 'accept',
-        title: 'Accept ',
-      },
-      {
-        name: 'reject',
-        title: 'Reject ',
-      }
+        {
+          name: 'view',
+          title: 'View ',
+        }
       ],
 
       add: false,
@@ -87,55 +82,6 @@ export class LeaseListComponent implements OnInit {
     },
   };
 
-  private lesseeSettings = {
-
-    columns: {
-      startDate: {
-        title: 'Start Date',
-      },
-
-      endDate: {
-        title: 'End Date',
-      },
-
-      status: {
-        title: 'Status'
-      },
-      
-      lessor: {
-        title: 'Lessor',
-        valuePrepareFunction: (lessor) => {
-          return lessor.username;
-        },
-        filterFunction(lessor?: any, search?: string): boolean {
-          let match = lessor.username.indexOf(search) > -1
-          if (match || search === '') {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      },
-
-      lessee: {
-        title: 'Lessee',
-        valuePrepareFunction: (lessee) => {
-          return lessee.username;
-        },
-        filterFunction(lessee?: any, search?: string): boolean {
-          let match = lessee.username.indexOf(search) > -1
-          if (match || search === '') {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      }
-    },
-
-    actions: false
-  };
-
   constructor(
   	private itemService: ItemService,
     private listingService: ListingService,
@@ -146,49 +92,28 @@ export class LeaseListComponent implements OnInit {
     ) { }
 
   onCustom(event) {
-    console.log(event);
-    if (event.action === 'accept') {
-      this.leaseService.acceptLeaseRequestById(event.data.id).subscribe(
-        res => {
-          console.log(res.json());
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
-
-    if (event.action === 'reject') {
-      this.leaseService.rejectLeaseRequestById(event.data.id).subscribe(
-        res => {
-          console.log(res.json());
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
+    this.router.navigate(['/leaseDetail', event.data.id]);
   }
 
   ngOnInit() {
     this.leaseService.findLeasesByLessor().subscribe(
       res1 => {
-        this.lessorLeases = res1.json();
-        
+        this.leases = res1.json();
+        this.leaseService.findLeasesByLessee().subscribe(
+          res2 => {
+            this.leases.push.apply(this.leases,res2.json())
+            this.source = new LocalDataSource(this.leases);
+            console.log(this.leases);
+          },
+
+          error2 => {
+            console.log(error2);
+          }
+          );
       },
 
       error1 => {
         console.log(error1);
-      }
-      );
-
-    this.leaseService.findLeasesByLessee().subscribe(
-      res2 => {
-        this.lesseeLeases = res2.json()
-      },
-
-      error2 => {
-        console.log(error2);
       }
       );
   }

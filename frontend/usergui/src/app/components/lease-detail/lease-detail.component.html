@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="row">
+		<div class="col-6">
+			<ul class="list-group">
+				<li class="list-group-item">Start Date: {{lease.startDate}}</li>
+				<li class="list-group-item">End Date: {{lease.endDate}}</li>
+				<li class="list-group-item">Status: {{lease.status}}</li>
+				<li class="list-group-item">Lessor: {{lease?.lessor?.username}}</li>
+				<li class="list-group-item">Lessee: {{lease?.lessee?.username}}</li>
+			</ul>
+		</div>
+		<div class="col-6"></div>
+	</div>
+	<hr>
+	<div *ngIf="actionAvailable">
+	<button class="btn btn-warning pointer" (click)="acceptLeaseRequest()">Accept Request</button>
+	<button class="btn btn-default pointer" (click)="rejectLeaseRequest()">Reject Request</button>
+	</div>
+</div>

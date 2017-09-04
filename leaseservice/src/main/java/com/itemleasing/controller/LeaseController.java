@@ -83,4 +83,9 @@ public class LeaseController {
     public Lease rejectLeaseRequest(@PathVariable Long id) {
         return leaseService.rejectLeaseRequestById(id);
     }
+
+    @RequestMapping("/{id}")
+    public Lease findLeaseById(@PathVariable Long id) {
+        return leaseService.findLeaseById(id);
+    }
 }

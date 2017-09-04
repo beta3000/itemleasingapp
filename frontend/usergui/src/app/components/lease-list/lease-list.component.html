@@ -1,20 +1,10 @@
 <div class="container">
   <div>
     <h3>
-      My Leases as Lessor
+      My Leases
     </h3>
       <div>
-         <ng2-smart-table [settings]="lessorSettings" [source]="lessorLeases" (custom)="onCustom($event)"></ng2-smart-table>
+         <ng2-smart-table [settings]="Settings" [source]="source" (custom)="onCustom($event)"></ng2-smart-table>
       </div>
   </div>
-  <br><hr><br>
-  <div>
-    <h3>
-      My Leases as Lessee
-    </h3>
-      <div>
-         <ng2-smart-table [settings]="lesseeSettings" [source]="lesseeLeases"></ng2-smart-table>
-      </div>
-  </div>
-  <br>
 </div>

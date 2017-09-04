@@ -41,6 +41,7 @@ import { AllListingsComponent } from './components/all-listings/all-listings.com
 import { ListingDetailComponent } from './components/listing-detail/listing-detail.component';
 import { AddLeaseComponent } from './components/add-lease/add-lease.component';
 import { LeaseListComponent } from './components/lease-list/lease-list.component';
+import { LeaseDetailComponent } from './components/lease-detail/lease-detail.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { LeaseListComponent } from './components/lease-list/lease-list.component
     AllListingsComponent,
     ListingDetailComponent,
     AddLeaseComponent,
-    LeaseListComponent
+    LeaseListComponent,
+    LeaseDetailComponent
   ],
   imports: [
     BrowserModule,
