@@ -8,6 +8,8 @@ import com.itemleasing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by z00382545 on 9/3/17.
  */
@@ -32,5 +34,15 @@ public class LeaseServiceImpl implements LeaseService{
         Lease newLease = leaseRepository.save(lease);
 
         return newLease;
+    }
+
+    @Override
+    public List<Lease> findLeasesByLessor(User lessor) {
+        return leaseRepository.findByLessor(lessor);
+    }
+
+    @Override
+    public List<Lease> findLeasesByLessee(User lessee) {
+        return leaseRepository.findByLessee(lessee);
     }
 }
