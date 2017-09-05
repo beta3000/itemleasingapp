@@ -1,10 +1,14 @@
 server:
   port: 8888
 spring:
-  profiles:
-    active: native
   cloud:
     config:
       server:
-        native:
-          searchLocations: file:///Users/z00382545/projects/ItemLeasingApp/configurationserver/src/main/resources/config/itemservice
+        git:
+          uri: https://github.com/raydeng83/config-repo/
+          username: raydeng83
+          password: Rochester24
+          search-paths: itemservice, userservice, listingservice, leaseservice, authenticationservice
+
+        encrypt:
+          enabled: false
