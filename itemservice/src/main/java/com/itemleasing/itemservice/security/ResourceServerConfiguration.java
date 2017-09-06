@@ -13,7 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter{
 
     private static final String[] PUBLIC_MATCHERS = {
-            "/v1/item/all"
+            "/v1/item/all",
+            "/v1/item/user/{username}"
     };
 
     @Override

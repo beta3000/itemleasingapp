@@ -3,6 +3,7 @@ package com.itemleasing.itemservice.controller;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.config.ServiceConfig;
 import com.itemleasing.itemservice.model.Item;
+import com.itemleasing.itemservice.model.User;
 import com.itemleasing.itemservice.service.ItemService;
 import com.itemleasing.itemservice.service.S3Service;
 import com.itemleasing.itemservice.utils.tokenParser;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -86,5 +88,10 @@ public class ItemController {
             ) {
 
         return itemService.uploadItemImage(multipartFiles, Long.parseLong(itemId));
+    }
+
+    @RequestMapping("/user/{username}")
+    public User getUserByUsername(@PathVariable  String username) {
+        return itemService.getUserByUsername(username);
     }
 }

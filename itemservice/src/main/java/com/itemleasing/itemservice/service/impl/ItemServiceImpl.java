@@ -1,6 +1,7 @@
 package com.itemleasing.itemservice.service.impl;
 
 import com.amazonaws.services.s3.model.PutObjectResult;
+import com.itemleasing.itemservice.clients.UserFeignClient;
 import com.itemleasing.itemservice.model.Item;
 import com.itemleasing.itemservice.model.User;
 import com.itemleasing.itemservice.repository.ItemRepository;
@@ -31,6 +32,9 @@ public class ItemServiceImpl implements ItemService{
 
     @Autowired
     private S3Service s3Service;
+
+    @Autowired
+    private UserFeignClient userFeignClient;
 
     @Override
     public Item addItemByUser(Item item, String username) {
@@ -93,6 +97,11 @@ public class ItemServiceImpl implements ItemService{
         List<PutObjectResult> putObjectResultList = s3Service.upload(multipartFiles, item);
 
         return putObjectResultList;
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userFeignClient.getUserByUsername(username);
     }
 
 

@@ -44,6 +44,7 @@ public class UseServiceImpl implements UserService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    @Override
     public User createUser(User user) {
         User localUser = userRepository.findByUsername(user.getUsername());
 
@@ -84,4 +85,10 @@ public class UseServiceImpl implements UserService {
         // send request to S3 to create folder
         amazonS3.putObject(putObjectRequest);
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }

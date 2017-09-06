@@ -2,6 +2,7 @@ package com.itemleasing.itemservice.service;
 
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.model.Item;
+import com.itemleasing.itemservice.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,4 +19,6 @@ public interface ItemService {
     Item updateItem(Item item) throws IOException;
     void deleteItemById(Long id);
     List<PutObjectResult> uploadItemImage(MultipartFile[] multipartFiles, Long id);
+
+    User getUserByUsername(String username);
 }
