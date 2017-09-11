@@ -8,6 +8,8 @@ import com.itemleasing.itemservice.repository.ItemRepository;
 import com.itemleasing.itemservice.service.ItemService;
 import com.itemleasing.itemservice.service.S3Service;
 import com.itemleasing.itemservice.service.UserService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,7 @@ import java.io.IOError;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by z00382545 on 8/22/17.
@@ -100,9 +103,33 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
+//    @HystrixCommand(commandProperties = {@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "12000")})
+    @HystrixCommand(fallbackMethod = "buildFallbackUser")
     public User getUserByUsername(String username) {
+        randomlyRunLong();
+
         return userFeignClient.getUserByUsername(username);
     }
 
+    private void randomlyRunLong(){
+        Random rand = new Random();
+        int randomNum = rand.nextInt((3 - 1) + 1) + 1;
+        if (randomNum==3) sleep();
+    }
+    private void sleep(){
+        try {
+            Thread.sleep(11000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private User buildFallbackUser(String username) {
+        User user = new User();
+        user.setId(12319732L);
+        user.setUsername("no username");
+
+        return user;
+    }
 
 }
