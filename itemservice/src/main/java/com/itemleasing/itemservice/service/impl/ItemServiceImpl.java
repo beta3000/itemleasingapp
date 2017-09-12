@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,7 @@ import java.util.Random;
  */
 
 @Service
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemRepository itemRepository;
@@ -74,7 +73,7 @@ public class ItemServiceImpl implements ItemService{
     public Item updateItem(Item item) throws IOException {
         Item localItem = getItemById(item.getId());
 
-        if(localItem == null) {
+        if (localItem == null) {
             throw new IOException("Item was not found.");
         } else {
             localItem.setName(item.getName());
@@ -103,20 +102,36 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-//    @HystrixCommand(commandProperties = {@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "12000")})
-    @HystrixCommand(fallbackMethod = "buildFallbackUser")
+    @HystrixCommand(commandProperties = {@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "12000")})
+
+//    @HystrixCommand(
+//            fallbackMethod = "buildFallbackUser",
+//            threadPoolKey = "licenseByOrgThreadPool",
+//            threadPoolProperties = {
+//                    @HystrixProperty(name = "coreSize", value = "30"),
+//                    @HystrixProperty(name = "maxQueueSize", value = "10"),
+//            },
+//            commandProperties = {
+//                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+//                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "75"),
+//                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
+//                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",
+//                            value = "15000"), @HystrixProperty(
+//                    name = "metrics.rollingStats.numBuckets", value = "5")}
+//    )
     public User getUserByUsername(String username) {
-        randomlyRunLong();
+//        randomlyRunLong();
 
         return userFeignClient.getUserByUsername(username);
     }
 
-    private void randomlyRunLong(){
+    private void randomlyRunLong() {
         Random rand = new Random();
         int randomNum = rand.nextInt((3 - 1) + 1) + 1;
-        if (randomNum==3) sleep();
+        if (randomNum == 3) sleep();
     }
-    private void sleep(){
+
+    private void sleep() {
         try {
             Thread.sleep(11000);
         } catch (InterruptedException e) {

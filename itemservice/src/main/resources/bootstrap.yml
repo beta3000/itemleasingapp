@@ -17,5 +17,5 @@ spring:
     config:
       discovery:
         enabled: true
-        service-id: configserver
+#        service-id: configserver
 #      enabled: true
