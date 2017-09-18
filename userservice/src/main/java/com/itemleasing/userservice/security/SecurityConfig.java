@@ -19,6 +19,7 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
 //            "/v1/user/**"
+            "/v1/user"
     };
 
     @Override

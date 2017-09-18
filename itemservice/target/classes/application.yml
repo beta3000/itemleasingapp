@@ -1,6 +1,24 @@
 security:
  oauth2:
   resource:
-    userInfoUri: http://localhost:8901/user
+    userInfoUri: http://127.0.0.1:8901/user
 
 
+spring:
+  cloud:
+    stream:
+      bindings:
+        inboundUserChanges:
+          destination: userChangeTopic
+          content-type: application/json
+          group: itemGroup
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.itemleasing: DEBUG

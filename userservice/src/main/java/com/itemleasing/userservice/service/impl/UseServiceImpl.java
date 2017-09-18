@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.itemleasing.userservice.event.SimpleSourceBean;
 import com.itemleasing.userservice.model.User;
 import com.itemleasing.userservice.model.security.Role;
 import com.itemleasing.userservice.model.security.UserRole;
@@ -39,6 +40,9 @@ public class UseServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Autowired
+    private SimpleSourceBean simpleSourceBean;
+
+    @Autowired
     private AmazonS3 amazonS3;
 
     @Value("${cloud.aws.s3.bucket}")
@@ -65,7 +69,11 @@ public class UseServiceImpl implements UserService {
             user.setPassword(encryptedPassword);
             localUser = userRepository.save(user);
 
-            createS3UserFolder(user);
+            simpleSourceBean.publishUserChange("CREATE", localUser.getUsername());
+
+//            createS3UserFolder(user);
+
+
         }
 
         return localUser;
