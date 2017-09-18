@@ -8,7 +8,7 @@ spring:
           uri: https://github.com/raydeng83/config-repo
           username: raydeng83
           password: Rochester24
-          search-paths: itemservice, userservice, listingservice, leaseservice, authenticationservice
+          search-paths: itemservice, userservice, listingservice, leaseservice, authenticationservice, zuulservice
 
         encrypt:
           enabled: false
