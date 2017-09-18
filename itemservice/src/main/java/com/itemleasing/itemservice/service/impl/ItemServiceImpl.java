@@ -2,6 +2,7 @@ package com.itemleasing.itemservice.service.impl;
 
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.itemleasing.itemservice.clients.UserFeignClient;
+import com.itemleasing.itemservice.clients.UserRestTemplateClient;
 import com.itemleasing.itemservice.model.Item;
 import com.itemleasing.itemservice.model.User;
 import com.itemleasing.itemservice.repository.ItemRepository;
@@ -37,6 +38,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private UserFeignClient userFeignClient;
+
+    @Autowired
+    private UserRestTemplateClient userRestTemplateClient;
 
     @Override
     public Item addItemByUser(Item item, String username) {
@@ -102,7 +106,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @HystrixCommand(commandProperties = {@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "12000")})
+//    @HystrixCommand(commandProperties = {@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "12000")})
 
 //    @HystrixCommand(
 //            fallbackMethod = "buildFallbackUser",
@@ -122,7 +126,9 @@ public class ItemServiceImpl implements ItemService {
     public User getUserByUsername(String username) {
 //        randomlyRunLong();
 
-        return userFeignClient.getUserByUsername(username);
+//        return userFeignClient.getUserByUsername(username);
+
+        return userRestTemplateClient.getUser(username);
     }
 
     private void randomlyRunLong() {

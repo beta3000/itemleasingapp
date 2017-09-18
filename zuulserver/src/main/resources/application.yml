@@ -5,3 +5,14 @@
 #        isolation:
 #          thread:
 #            timeoutInMilliseconds: 2500
+
+
+
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: false
+zuul:
+  sensitive-headers: Cookie, Set-Cookie
