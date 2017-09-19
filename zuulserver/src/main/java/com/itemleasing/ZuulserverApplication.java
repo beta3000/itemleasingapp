@@ -17,7 +17,7 @@ import java.util.List;
 @EnableZuulProxy
 public class ZuulserverApplication {
 
-	@LoadBalanced
+//	@LoadBalanced
 	@Bean
 	public RestTemplate getRestTemplate() {
 		RestTemplate template = new RestTemplate();
